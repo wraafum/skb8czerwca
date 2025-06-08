@@ -2,7 +2,7 @@
 import * as dom from './domElements.js';
 import { saveGame, loadGame, resetGame, GAME_SAVE_KEY } from './playerState.js';
 // POPRAWKA: Zaimportowano funkcje czyszczące interwały i timeouty
-import { initGame, generateEssence, stopAllIntervals } from './gameLogic.js';
+import { initGame, generateEssence, stopAllIntervals, updateInteractionPanelHeight } from './gameLogic.js';
 import { showCustomAlert, hideCustomAlert, updateDisplay, clearAllUiTimeouts } from './uiUpdates.js';
 // NOWE: Import funkcji aktualizujących zasoby dla przycisków testowych
 import { updateEssence, updateDarkEssence, updateCorruption } from './stateUpdaters.js';
@@ -22,25 +22,6 @@ if (!upgradesValid || !researchValid || !temptationsValid) {
 }
 
 // =======================================================
-// NOWA FUNKCJA DO REGULACJI WYSOKOŚCI PANELU
-// =======================================================
-function updateInteractionPanelHeight() {
-    // Pobieramy odwołania do panelu Lilith i panelu interakcji
-    const lilithPanel = document.getElementById('lilith-card-panel');
-    const interactionPanel = document.getElementById('active-interaction-section');
-
-    // Sprawdzamy, czy oba elementy istnieją w DOM
-    if (lilithPanel && interactionPanel) {
-        // Pobieramy aktualną wysokość panelu Lilith w pikselach
-        const lilithHeight = lilithPanel.offsetHeight;
-        // Obliczamy 4/6 tej wysokości
-        const targetHeight = lilithHeight * (4 / 6);
-        // Ustawiamy wysokość panelu interakcji, dodając 'px'
-        interactionPanel.style.height = `${targetHeight}px`;
-    }
-}
-
-
 // Inicjalizacja gry
 document.addEventListener('DOMContentLoaded', () => {
     // Podpięcie event listenerów do przycisków zapisu/odczytu

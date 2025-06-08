@@ -48,7 +48,7 @@ const VOCAL_THOUGHT_CHANGE_INTERVAL_SECONDS = BALANCE_MODIFIERS.vocalThoughts.ch
 let vocalThoughtIntervalCounter = 0;
 
 // POPRAWKA: Skopiowana funkcja do regulacji wysokości, aby uniknąć problemów z importem cyklicznym
-function updateInteractionPanelHeight() {
+export function updateInteractionPanelHeight() {
     const lilithPanel = document.getElementById('lilith-card-panel');
     const interactionPanel = document.getElementById('active-interaction-section');
     if (lilithPanel && interactionPanel) {
