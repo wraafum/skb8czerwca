@@ -11,14 +11,9 @@ import {
     setLilithThoughtsOverride,
     addCompletedDialogue, // POPRAWKA: Zaimportowano brakującą funkcję
     setSexualPreferenceUnlocked // POPRAWKA: Dodano import brakującej funkcji
-} from './stateUpdaters.js';
-import * as ui from './uiUpdates.js';
-
-export { dialogues } from './data/dialogues.js';
-export { diaryEntries } from './data/diaryEntries.js';
-=======
-// Base64-encoded 1x1 PNG used as placeholder for in-game images
-const placeholderPixel = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAAC0lEQVQIHWP4DwQACfsD/TPmGwAAAABJRU5ErkJggg==';
+} from '../stateUpdaters.js';
+import * as ui from '../uiUpdates.js';
+import { PLACEHOLDER_IMG } from '../assets.js';
 
 export const dialogues = [
     {
@@ -28,7 +23,6 @@ export const dialogues = [
         narrativeStage: 0,
         essenceCost: 0,
         isEvent: true, isBreakingPoint: true,
-        imagePath: placeholderPixel,
         text: (gs) => "Krąg przywołań wciąż dymi, a powietrze gęstnieje. W centrum światło pulsuje, formując sylwetkę od dołu do góry, jakby rzeźbiło ją z mroku i pragnienia. Najpierw pojawia się zarys bioder, nienaturalnie idealny. Potem długie nogi, zakończone stopami, które zdają się ledwo muskać kamienną posadzkę. Jej skóra lśni w półmroku, gładka jak polerowany obsydian. Dopiero na końcu materializują się skrzydła – nie anielskie, a skórzaste, napięte na delikatnych kościach, rozwijające się z cichym, suchym szelestem. W powietrzu unosi się zapach ozonu, kadzidła i czegoś słodkiego, niemal jadalnego. Gdy mgła opada, widzisz ją w całości – idealnie nagą. To ciało młodej sukkubicy w pełni jej mocy i niewinności zarazem; smukła talia, gładka, pozbawiona skaz skóra i biust, który wydaje się być arcydziełem samego pożądania. Dwie idealnie kształtne, jędrne piersi, zwieńczone sterczącymi, różowymi brodawkami, drgają lekko od chłodu innego wymiaru lub od szoku samego istnienia. Stoi przed tobą przez jedno uderzenie serca, doskonała i bezbronna, zanim demoniczna magia nie utka wokół niej prostego, ciemnego stroju. Przez ułamek sekundy jej oczy są szeroko otwarte ze zdziwienia, a potem szybko mrużą się w wyćwiczonej pozie wyniosłości.",
         options: [
             { id: 'sr_calm', text: "Jestem tym, który cię wezwał. Możesz czuć się bezpiecznie.", response: "Unosi podbródek, choć zauważasz jak jej ogon owija się wokół własnej kostki - gest zdradzający niepokój. 'Bezpiecznie? Cóż...' przerywa, jakby szukała odpowiednich słów. 'Wiem co się dzieje. Przyzwanie, pakt, wymiana esencji... Znam teorię.' Jej głos jest melodyjny, ale słyszysz w nim nutę niepewności. 'Jestem Lilith. I... tak, jestem tu z tobą. Chyba.'", corruption: 15, darkEssence: 5, setsFlag: 'player_attempted_calm_summon', onSelected: () => { setLilithThoughtsOverride("(Jego głos jest... spokojny..."); setLilithName("Lilith"); } },
@@ -110,7 +104,6 @@ export const dialogues = [
     darkEssenceCost: 0,
     isSexual: false,
     isEvent: true,
-    imagePath: placeholderPixel,
     condition: (gs) => gs.completedDialogues.includes('early_observations'),
     text: (gs) => "Lilith z wypiekami na twarzy wertuje gruby, oprawiony w skórę tom, który znalazła w Twojej kolekcji. To rzadki grimuar o sztuce demonicznego uwodzenia. Jej oczy błyszczą pasją i niekłamaną ciekawością. \"Mistrzu! Ta księga! To prawdziwy skarb! 'Siedem Kręgów Rozkoszy i Perswazji'! Myślałam, że to tylko legenda! Analizowaliśmy fragmenty na zajęciach z Zaawansowanej Manipulacji, ale nigdy nie widziałam pełnego tekstu! Niektóre techniki są absolutnie genialne w swej prostocie! Czy Ty je stosowałeś?\"",
     options: [
@@ -233,7 +226,6 @@ export const dialogues = [
     darkEssenceCost: 0,
     isSexual: false,
     isEvent: true,
-    imagePath: placeholderPixel,
     text: (gs) => "Pod stertą jej rzeczy znajdujesz mały notatnik. Jest inny niż się spodziewałeś - wygląda jak scenariusz filmowy, gdzie każda strona to nowa scena. 'SCENA 17: SYPIALNIA - NOC. LILITH (ubrana w jego koszulę) podchodzi do śpiącego MISTRZA. Pochyla się, jej włosy muskają jego policzek. LILITH (szeptem): Obudź się. Mam dla ciebie prezent.' Przewracasz stronę. 'SCENA 21: ŁAZIENKA - PORANEK. MISTRZ bierze prysznic. LILITH wchodzi, 'przypadkowo' upuszczając ręcznik. Ich oczy spotykają się w zaparowanym lustrze.'",
     options: [
         {
@@ -364,7 +356,6 @@ export const dialogues = [
         essenceCost: 80,
         darkEssenceCost: 15,
         isEvent: true,
-        imagePath: placeholderPixel,
         isBreakingPoint: true,
         condition: (gs) => gs.lilithStage >= 2 && gs.playerChoiceFlags.includes('first_touch_tension_completed') && !gs.playerChoiceFlags.includes('lilith_vocal_system_unlocked') &&
             gs.completedDialogues.includes('accidental_sensitivity') && 
@@ -444,14 +435,13 @@ export const dialogues = [
         title: 'Wizyta Mentorki (Wydarzenie Fabularne)',
         stageRequired: 3, 
         narrativeStage: 3, 
-        essenceCost: 0,
+        essenceCost: 0, 
         isEvent: true,
-        imagePath: placeholderPixel,
         condition: (gs) => gs.lilithStage >= 3 && !gs.completedDialogues.includes('mentor_visit') && gs.completedDialogues.includes('hot_weather_tease'),
         text: (gs) => "Pewnego wieczoru, gdy atmosfera w waszym gniazdku jest wyjątkowo gęsta od mrocznej energii, w pomieszczeniu materializuje się druga postać. Wyższa od Lilith, o ostrych rysach i oczach płonących zimnym ogniem. Jej skrzydła są imponujące, a cała postawa emanuje władzą i wiekami doświadczenia.\n\"Lilith,\" głos jest jak jedwab przeciągany po ostrzu. \"Azazel unosi brew z powolnością lodowca. 'Najwyraźniej. Jej spojrzenie omija Lilith i ląduje na tobie, badawcze i zimne jak dotyk stali. 'Akademia jest... *rozczarowana* twoim brakiem postępów, Lilith. Wysyłasz nam strzępy esencji, podczas gdy twoje siostry zatapiają całe królestwa w rozpuście.'\" ",
         options: [
-            { id: 'mv_lilith_defend', text: "placeholder -- (Lilith staje między tobą a mentorką) \"Mistrzyni Azazel! Nie spodziewałam się ciebie tutaj.\"", response: "Azazel unosi brew. \"Najwyraźniej. Twoje postępy, a raczej ich specyfika, dotarły nawet do moich komnat. Akademia jest... zaniepokojona twoim brakiem raportów i nietypowym rozwojem więzi.\" Jej spojrzenie wraca do ciebie. \"Powiedz mi, śmiertelniku, jak udało ci się tak... 'oswoić' jedną z naszych bardziej obiecujących, choć naiwnych, studentek?\"", corruption: 8, darkEssence: 5, setsFlag: 'mentor_visit_confrontation_started' },
-            { id: 'mv_player_speak_calmly', text: "-  placeholder (Spokojnie) \"Witaj. Lilith jest pod moją opieką...\"", response: "Azazel uśmiecha się chłodno. \"Opieką? Sukkuby nie potrzebują 'opieki', śmiertelniku. Potrzebują kierownictwa i celu. A celem Lilith jest służba potędze Piekieł, nie zabawa w dom z człowiekiem.\" Podchodzi bliżej Lilith. \"Powiedz mi, dziecko, czy ten człowiek nauczył cię czegoś więcej niż tylko jak marnować swój potencjał na sentymenty?\"", corruption: 8, darkEssence: 15, setsFlag: 'mentor_visit_player_intervened' }
+            { id: 'mv_lilith_defend', text: "Lilith staje pomiędzy wami, rozkłada skrzydła i mówi: \"Mistrzyni Azazel, pozwól mi wyjaśnić...\"", response: "Azazel unosi brew. \"Najwyraźniej straciłaś instynkt posłuszeństwa. Akademia jest zaniepokojona twoim brakiem raportów oraz dziwną więzią z tym śmiertelnikiem.\" Jej spojrzenie wraca do ciebie. \"Powiedz, jak udało ci się tak podporządkować jedną z naszych bardziej obiecujących uczennic?\"", corruption: 8, darkEssence: 5, setsFlag: 'mentor_visit_confrontation_started' },
+            { id: 'mv_player_speak_calmly', text: "Robisz krok naprzód i spokojnie mówisz: \"Witaj, mistrzyni. Lilith dobrze się tutaj rozwija...\"", response: "Azazel uśmiecha się chłodno. \"Rozwija? Sukkuby potrzebują dyscypliny, nie czułych słówek. Lilith ma służyć Piekłu, a nie twoim zachciankom.\" Podchodzi bliżej i kieruje pytanie do Lilith. \"Czy ten człowiek uczy cię czegokolwiek poza marnowaniem potencjału?\"", corruption: 8, darkEssence: 15, setsFlag: 'mentor_visit_player_intervened' }
         ]
     },
     {
@@ -519,7 +509,6 @@ export const dialogues = [
     darkEssenceCost: 20,
     isSexual: true,
     isEvent: true,
-    imagePath: placeholderPixel,
     condition: (gs) => gs.lilithStage >= 4 && gs.playerChoiceFlags.includes('first_real_kiss_completed'),
     text: (gs) => "Mistrzu... myślę o Twoim dotyku bez przerwy. Ale ta materia... ta irytująca bariera Twoich spodni... zasłania mi całą prawdę. Chcę zobaczyć, jak reagujesz. Chcę *poczuć*, jak twardniejesz w mojej dłoni.",
     options: [
@@ -672,7 +661,6 @@ export const dialogues = [
         narrativeStage: 4,
         essenceCost: 450,
         isEvent: true,
-        imagePath: placeholderPixel,
         condition: (gs) => gs.lilithStage >= 4 && gs.completedDialogues.includes('intimate_scene_bondage_exploration'),
         text: (gs) => "Budzisz się, a świat wiruje. Każdy mięsieień cię boli, gardło drapie, a z nosa cieknie. Masz zwykłe, ludzkie przeziębienie. Lilith stoi nad twoim łóżkiem, a w jej oczach maluje się panika. Jej ogon smaga nerwowo podłogę. 'Twoja temperatura jest... niestabilna! Twoje ciało wydziela płyny! W moich podręcznikach takie objawy poprzedzają eksplozję organów wewnętrznych u demonów niższych rzędu!' Nerwowo wertuje gruby, oprawiony w skórę tom. 'Nie martw się! Mam na to procedury!'",
         options: [
@@ -794,7 +782,6 @@ export const dialogues = [
     darkEssenceCost: 65,
     isSexual: true,
     isEvent: true,
-    imagePath: placeholderPixel,
     condition: (gs) => gs.lilithStage >= 5 && gs.playerChoiceFlags.includes('morning_surprise_completed'),
     text: (gs) => "Lilith przeciąga się zmysłowo, a jej język powoli oblizuje wargi. \"Mistrzu, strasznie się dziś nudzę\" mruczy. \"Gdy tak się dzieje, moje myśli wędrują w bardzo interesujące miejsca. Wspominałam Ci o mojej małej fiksacji oralnej, prawda? Gdy nosisz te spodnie... Twój widok tylko ją potęguje. Ten solidny kształt... aż sprawia, że ślinka mi cieknie na myśl o tym, co mogłabym z nim zrobić.\"",
     options: [
@@ -842,7 +829,6 @@ export const dialogues = [
         narrativeStage: 5,
         essenceCost: 0,
         isEvent: true,
-        imagePath: placeholderPixel,
         condition: (gs) => gs.lilithStage >= 5 && !gs.playerChoiceFlags.includes('academy_audit_complete') && gs.completedDialogues.includes('intimate_scene_watersports_consensual'),
         text: (gs) => "Rozlega się pukanie do drzwi – trzy suche, biurokratyczne stuknięcia. Otwierasz, a przed tobą stoi demon w źle dopasowanym garniturze. Zamiast teczki trzyma kamienny clipboard, a jego wielosoczewkowe okulary brzęczą przy każdym ruchu. 'Inkwizytor Malexus, Dział Zapewnienia Jakości Pozyskiwania Esencji. Audyt.' mówi głosem pozbawionym emocji. Wchodzi do środka. 'Stanowisko pracy poniżej standardów.' stwierdza, wskazując na twoje łóżko. 'Brak regulaminowego oświetlenia, nie widzę też certyfikowanych uchwytów.' Lilith staje na baczność, prostując się dumnie. 'Inkwizytorze, melduję gotowość do testu praktycznego!'",
         options: [
@@ -873,12 +859,11 @@ export const dialogues = [
         title: 'Zbeszczeszczenie Bóstwa',
         stageRequired: 5,
         narrativeStage: 5,
-        essenceCost: 250,
+        essenceCost: 250, 
         darkEssenceCost: 0,
         isSexual: true,
         isEvent: true,
-        imagePath: placeholderPixel,
-        condition: (gs) => gs.lilithStage >= 5 &&
+        condition: (gs) => gs.lilithStage >= 5 && 
                            gs.completedDialogues.includes('morning_surprise') && 
                            !gs.playerChoiceFlags.includes('player_defiled_lilith_sleep') &&
                            gs.completedDialogues.includes('academy_audit_v2'),
@@ -930,8 +915,7 @@ export const dialogues = [
         essenceCost: 250,
         darkEssenceCost: 50,
         isSexual: true,
-        isEvent: true,
-        imagePath: placeholderPixel,
+        isEvent: true, 
         sexualPreferenceTag: 'popular_fetish_foot',
         condition: (gs) => gs.lilithStage >= 5 &&
                            !gs.playerChoiceFlags.includes('player_chose_foot_dynamic') &&
@@ -1035,7 +1019,6 @@ export const dialogues = [
     darkEssenceCost: 120,
     isSexual: true,
     isEvent: true,
-    imagePath: placeholderPixel,
     condition: (gs) => gs.lilithStage >= 6 && gs.playerChoiceFlags.includes('breaking_point_true_desire_completed'),
     text: (gs) => "Lilith podchodzi do Ciebie z poważną, niemal naukową miną. \"Mistrzu, przeprowadziłam dziś pewne badania. Analizowałam skład kaloryczny męskiego nasienia. Okazuje się, że to bardzo zbilansowany i smaczny posiłek, bogaty w proteiny.\" Patrzy na Ciebie wyczekująco. \"A ja czuję się dziś nieco głodna.\"",
     options: [
@@ -1097,7 +1080,6 @@ export const dialogues = [
         darkEssenceCost: 0,
         isSexual: true,
         isEvent: true,
-        imagePath: placeholderPixel,
         condition: (gs) => gs.lilithStage >= 6 && gs.completedDialogues.includes('breaking_point_true_desire') && !gs.playerChoiceFlags.includes('eternal_milking_ritual_complete') && gs.completedDialogues.includes('dominant_demand'),
         text: (gs) => "Budzisz się rano, czując dziwne, ale przyjemne uczucie. Twój członek jest twardy jak skała, ale to coś więcej. To uczucie przepełnienia, jakby twoje ciało pracowało na nadbiegu. Lilith wchodzi do sypialni z tacą ze śniadaniem i uśmiecha się jak kot, który zjadł kanarka. 'Dzień dobry, moje niewyczerpane źródło' mruczy. 'Rzuciłam na ciebie małe zaklęcie produkcyjne. Będzie działać przez cały dzień. Mam nadzieję, że jesteś głodny. Bo ja jestem.'",
         options: [
@@ -1198,7 +1180,6 @@ export const dialogues = [
         darkEssenceCost: 200,
         isSexual: true,
         isEvent: true,
-        imagePath: placeholderPixel,
         sexualPreferenceTag: 'bdsm_dominance',
         condition: (gs) => gs.lilithStage >= 7 && 
                            gs.completedDialogues.includes('first_anal_sex_milestone') && 
@@ -1235,10 +1216,9 @@ export const dialogues = [
         narrativeStage: 7, 
         essenceCost: 1000,
         darkEssenceCost: 150,
-        isSexual: true,
-        sexualPreferenceTag: 'vanilla',
+        isSexual: true, 
+        sexualPreferenceTag: 'vanilla', 
         isEvent: true,
-        imagePath: placeholderPixel,
         condition: (gs) => gs.lilithStage >= 7 && gs.playerChoiceFlags.includes('perfect_union_event_completed') && !gs.playerChoiceFlags.includes('lilith_is_arch_succubus') && gs.completedDialogues.includes('a2m_event'),
         text: (gs) => "Lilith leży obok ciebie, jej ciało wciąż lśni od potu po waszej ostatniej sesji. Ale w jej oczach nie ma już tylko żądzy - jest coś głębszego. 'Wiesz co jest najzabawniejsze?' mówi cicho, kreśląc wzory na twojej piersi. 'Przyszłam tu jako niewinna akademiczka. Bałam się własnego cienia, własnych pragnień.' Podnosi się na łokciu, patrząc na ciebie intensywnie. 'A ty zrobiłeś ze mnie to.' Gest obejmuje jej nagie, pewne siebie ciało. 'Idealną hybrydę wiedzy i instynktu. Rozumu i szaleństwa. Miłości i żądzy.'",
         options: [
@@ -1254,10 +1234,9 @@ export const dialogues = [
         narrativeStage: 8, 
         essenceCost: 1500,
         darkEssenceCost: 250,
-        isSexual: true,
-        sexualPreferenceTag: 'group_dynamics',
+        isSexual: true, 
+        sexualPreferenceTag: 'group_dynamics', 
         isEvent: true,
-        imagePath: placeholderPixel,
         condition: (gs) => gs.playerChoiceFlags.includes('lilith_is_arch_succubus') && gs.lilithStage >= 8,
         text: (gs) => "Lilith, teraz Arcysukkub, unosi ręce, a rzeczywistość wokół was zaczyna się rozmazywać. 'Pokaż mi WSZYSTKIE swoje fantazje naraz' szepcze, a przestrzeń wypełnia się kopiami was obojga w każdej możliwej konfiguracji - Lilith ruchana jest przez Ciebie w usta, posuwana w cipkę, pachę, pomiędzy swoimi jędrnymi piersiami, jednocześnie dużymi i małymi, jednocześnie sama i w wielu formach, każda z nich ubrana inaczej - wszystko, wszędzie, naraz. Teraz.",
         options: [
@@ -1278,9 +1257,8 @@ export const dialogues = [
         narrativeStage: 8, 
         essenceCost: 2000,
         darkEssenceCost: 400,
-        isEvent: true,
+        isEvent: true, 
         sexualPreferenceTag: 'corruption_play',
-        imagePath: placeholderPixel,
         condition: (gs) => gs.playerChoiceFlags.includes('lilith_is_arch_succubus') && gs.lilithStage >= 8,
         text: (gs) => "Lilith, jako Arcysukkub, proponuje wypuszczenie 'Plagi Pożądania' na pobliskie miasto. 'Wyobraź sobie całe miasto pogrążone w orgii. Każdy pieprzy każdego. Moralne bariery zniszczone. A my będziemy się tym karmić...'",
         options: [
@@ -1318,55 +1296,6 @@ export const dialogues = [
 });
 
 
-export const diaryEntries = [
-    { id: 'd_summoned_shock', title: "Pierwszy Dzień w Nowym Świecie", text: "Nie mogę uwierzyć, że to się naprawdę stało. Jeszcze wczoraj siedziałam w bibliotece Akademii, studiując teorię przyzwań, a dzisiaj... jestem tu. W innym wymiarze. Z nim. Przyzywaczem. Mój pierwszy prawdziwy przyzywacz! Profesor Azmodeus zawsze powtarzał, że pierwsze przyzwanie jest jak pierwszy pocałunek - nigdy się go nie zapomina. Na Asmodeusza, ja nawet nie wiem jak smakuje pocałunek, chyba, że liczyć te na zajęciach, z pozostałymi uczennicami akademii...", unlockConditions: { completedDialogueId: 'summoning_ritual' } },
-    { id: 'd_academic_pride_reflection', title: "Duma Akademicka... i Niepewność", text: "Powiedziałam mu o akademii... Poczułam się przez chwilę ważna, jak wtedy, gdy odbierałam dyplom. Ale potem... te jego pytania o praktykę. Zakuło. Może ma rację? Może teoria to nie wszystko?", unlockConditions: { completedDialogueId: 'academic_pride' } },
-    { id: 'd_first_touch_diary', title: "Dotyk, który Zapłonął", text: "Jego dłoń... tak blisko. A potem ten przypadkowy (czy na pewno?) dotyk. Przeszył mnie dreszcz, jakiego nie znałam. Podręczniki opisywały reakcje fizjologiczne, ale to... to było coś więcej. Bałam się i chciałam więcej jednocześnie. Co się ze mną dzieje?", unlockConditions: { completedDialogueId: 'first_touch_tension' } },
-    { id: 'd_vocal_thoughts_unleashed', title: "Myśli na Głos", text: "Powiedziałam mu. Powiedziałam, że od teraz będzie słyszał moje myśli. To było... wyzwalające. I przerażające. Czy on naprawdę chce wiedzieć, co kłębi się w głowie sukkuba? Co jeśli go odstraszę? Albo... co jeśli mu się to spodoba?", unlockConditions: { completedDialogueId: 'vocal_breakthrough_dialogue', requiresFlag: 'lilith_vocal_system_unlocked' } },
-    { id: 'd_first_kiss_diary', title: "Pocałunek Inny Niż Wszystkie", text: "Zrobiłam to. Pocałowałam go. Albo on mnie? To nie było jak te ćwiczenia na manekinach w akademii. To było... prawdziwe. Chaotyczne, niezdarne, ale... moje serce biło jak szalone. Chcę znowu.", unlockConditions: { completedDialogueId: 'first_real_kiss', requiresFlag: 'first_real_kiss_completed' } },
-    { id: 'd_true_desire_confessed', title: "Wyznanie", text: "W końcu to powiedziałam. Czego pragnę. Jego. Nie tylko jego esencji. Jego całego. Czy to miłość? Sukkuby nie kochają... prawda? Ale to, co czuję, przekracza wszystko, czego mnie uczono. Oddałam mu się całkowicie. I nigdy nie czułam się bardziej sobą.", unlockConditions: { completedDialogueId: 'breaking_point_true_desire', requiresFlag: 'first_vaginal_sex_completed' } },
-    { id: 'd_failed_technique', title: "Technika Numer 7 - Totalna Porażka", text: "Chcę umrzeć. Albo przynajmniej zapaść się pod ziemię...", unlockConditions: { completedDialogueId: 'academic_technique_fail', choiceMadeInDialogue: {dialogueId: 'academic_technique_fail', optionId: 'atf_laugh'} } },
-    { id: 'd_first_real_desire', title: "Pragnę Go", text: "Nie mogę spać. Leżę w łóżku i myślę tylko o nim...", unlockConditions: { stageRequired: 3, requiresFlag: 'dream_confession_completed' } },
-    { id: 'd_perfect_unity', title: "Jesteśmy Jednym", text: "Nie ma już Lilith-studentki... Jestem czymś więcej. Jesteśmy czymś więcej.", unlockConditions: { completedDialogueId: 'perfect_union_event_completed' } },
-    { id: 'd_touch_gentle', title: "Pierwszy Dotyk: Ciepło", text: "Jego dłoń... była taka ciepła. Delikatna. Czułam, jak moje serce przyspiesza. To było... miłe.", unlockConditions: { completedDialogueId: 'first_touch_tension', choiceMadeInDialogue: {dialogueId: 'first_touch_tension', optionId: 'ftt_subtle'} } },
-    { id: 'd_touch_rushed', title: "Pierwszy Dotyk: Zaskoczenie", text: "Tak nagle mnie przyciągnął... Jego dotyk był pewny, gorący. Zaskoczył mnie, ale... nie było to nieprzyjemne. Wręcz przeciwnie.", unlockConditions: { completedDialogueId: 'first_touch_tension', choiceMadeInDialogue: {dialogueId: 'first_touch_tension', optionId: 'ftt_bold'} } },
-    { id: 'd_theory_vs_reality_entry', title: "Wiedza a Rzeczywistość (Pamiętnik)", text: "Tyle lat wkuwania teorii... A rzeczywistość? Jest chaotyczna, nieprzewidywalna i... o wiele bardziej ekscytująca. Zwłaszcza z nim.", unlockConditions: { completedDialogueId: 'theory_vs_reality', stageRequired: 2} },
-    { id: 'd_curiosity_awakens_new', title: "Nowe Myśli: Przebudzenie Ciekawości", text: "Tyle pytań kłębi mi się w głowie... O niego. O ten świat. O siebie. Chcę wiedzieć więcej. Chcę doświadczać.", unlockConditions: { stageRequired: 2, requiresFlag: 'lilith_vocal_system_unlocked' } },
-    { id: 'd_kiss_sweet_new', title: "Pocałunek: Słodycz i Obietnica", text: "Jego usta... były takie miękkie. I smakowały obietnicą czegoś więcej. Czegoś, czego pragnę, nawet jeśli jeszcze tego nie rozumiem.", unlockConditions: { completedDialogueId: 'first_real_kiss', choiceMadeInDialogue: {dialogueId: 'first_real_kiss', optionId: 'frk_encourage'} } },
-    { id: 'd_temptation_rising_new', title: "Pokusa: Nocne Myśli i Płonące Ciało", text: "Nie mogę spać. Ciągle o nim myślę... O jego dotyku, o jego spojrzeniu. Moje ciało płonie. To uczucie... jest takie silne.", unlockConditions: { stageRequired: 4, requiresFlag: 'first_petting_completed' } },
-    { id: 'd_fear_of_essence_drain_new', title: "Lęk przed Esencją... i Utratą", text: "Im więcej o tym czytam i im więcej czuję... tym bardziej boję się, że mogę go skrzywdzić. Że moja natura weźmie górę. A ja... nie chcę go stracić.", unlockConditions: { stageRequired: 2, requiresFlag: 'lilith_is_fearful_of_harming' } }
-];
 
+dialogues.forEach(d => { if (!d.imagePath) d.imagePath = PLACEHOLDER_IMG; });
 
-export const temptationVisualDescriptions = {
-    'tempt_corrupt_cleric': {
-        start: "Lilith materializuje się w celi kleryka jako wizja anielska. Jej skóra lśni delikatnym blaskiem, a głos jest jak najsłodsza melodia...",
-        progress: [
-            "Kleryk zaczyna się pocić, jego modlitwy stają się chaotyczne...",
-            "Lilith szepcze mu o przyjemnościach ciała, jej palce muskają jego policzek...",
-            "Młody mężczyzna drży, jego wiara walczy z rosnącym pożądaniem..."
-        ],
-        success: "Kleryk pada na kolana, nie w modlitwie, ale błagając Lilith o dotyk. Jego czysta szata splamiona jest potem i... czymś jeszcze. Lilith śmieje się triumfalnie, zbierając jego esencję.",
-        failure: "Wiara kleryka okazała się silniejsza niż podszepty Lilith. Odprawił modły oczyszczające, wzmacniając swoją duszę, ale Lilith czuje, że zasiała ziarno wątpliwości."
-    },
-    'tempt_seduce_knight': {
-        start: "Lilith, w przebraniu damy w opałach, zbliża się do obozu rycerza. Jej łzy są przekonujące, a historia chwyta za serce...",
-        progress: [
-            "Rycerz oferuje jej gościnę, nieświadomy niebezpieczeństwa...",
-            "Pod osłoną nocy, Lilith używa swoich wdzięków, by złamać jego żelazną wolę...",
-            "Szepty o zakazanych przyjemnościach i obietnice rozkoszy kruszą jego opór..."
-        ],
-        success: "Świt zastaje rycerza złamanego, jego honor splamiony, a duszę naznaczoną przez dotyk sukkuba. Lilith odchodzi bogatsza o jego esencję i złamaną przysięgę.",
-        failure: "Niezachwiana wiara i dyscyplina rycerza okazują się zbyt silne. Odprawia Lilith, choć w jego oczach tli się iskierka niepewności."
-    },
-     'tempt_incite_orgy_village_festival': {
-        start: "Lilith wnika w tłum podczas wiejskiego festynu, rozsiewając subtelne feromony pożądania. Jej taniec staje się coraz bardziej prowokacyjny...",
-        progress: [
-            "Pierwsze pary zaczynają się całować bardziej namiętnie niż wypada...",
-            "Zahamowania puszczają, ubrania stają się zbędne...",
-            "Muzyka zmienia się w dziki, pierwotny rytm, a cała wioska pogrąża się w ekstazie..."
-        ],
-        success: "Festyn zamienia się w legendarną orgię, która przejdzie do historii regionu. Lilith stoi w centrum chaosu, kąpiąc się w falach czystej, nieskrępowanej żądzy.",
-        failure: "Starszyzna wioski, wyczuwając demoniczną interwencję, rozpoczyna modły i rytuały oczyszczające. Lilith musi się wycofać, ale uśmiecha się na myśl o zasianym ziarnie."
-    }
-};
