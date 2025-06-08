@@ -10,7 +10,8 @@ import {
     setResearchProjectUnlocked,
     setLilithThoughtsOverride,
     addCompletedDialogue, // POPRAWKA: Zaimportowano brakującą funkcję
-    setSexualPreferenceUnlocked // POPRAWKA: Dodano import brakującej funkcji
+    setSexualPreferenceUnlocked, // POPRAWKA: Dodano import brakującej funkcji
+    addSexualPreferenceSubCategory
 } from '../stateUpdaters.js';
 import * as ui from '../uiUpdates.js';
 import { PLACEHOLDER_IMG } from '../assets.js';
@@ -461,7 +462,7 @@ export const dialogues = [
                 darkEssence: 5,
                 onSelected: (gs) => {
                     setSexualPreferenceUnlocked('popular_fetish', true);
-                    ui.addSexualPreferenceSubCategory('popular_fetish', 'watersports');
+                    addSexualPreferenceSubCategory('popular_fetish');
                     addPlayerChoiceFlag('player_open_to_watersports');
                 }
             },
