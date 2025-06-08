@@ -100,6 +100,7 @@ export function startDialogue(dialogueId) {
     updateEssence(-totalEssenceCost);
     updateDarkEssence(-totalDarkEssenceCost);
 
+    timeoutManager.clear('dialogueEnd');
     setActiveDialogue(dialogueDef);
     updateInteractionPanelHeight(); // Ustawiamy wysokość panelu
 
@@ -202,7 +203,7 @@ export function selectOption(dialogueId, optionId) {
         }
         clearActiveDialogue();
         ui.updateDisplay();
-    }, 6000);
+    }, 60000);
 }
 
 export function applyStageSpecificUnlocks() {
