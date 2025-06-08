@@ -254,8 +254,12 @@ function updateLilithDisplay() {
         const newLilithNameStage = `${gameState.lilithName || 'Sukkub'} - Etap ${currentStageData.name}`;
         updateTextContentIfNeeded(dom.lilithNameStageEl, newLilithNameStage, 'lilithNameStage');
         const newImageSrc = currentStageData.imagePath || PLACEHOLDER_IMG;
+=======
+        const newImageSrc = currentStageData.imagePath;
         const newImageAlt = currentStageData.name ? `${currentStageData.name} - Obraz Lilith` : 'Obraz Lilith';
-        updateImageIfNeeded(dom.lilithImgTag, newImageSrc, newImageAlt, 'lilithImageSrc', 'lilithImageAlt');
+        if (newImageSrc) {
+            updateImageIfNeeded(dom.lilithImgTag, newImageSrc, newImageAlt, 'lilithImageSrc', 'lilithImageAlt');
+        }
         const newDescription = typeof improvedStageDescriptions[gameState.lilithStage] === 'function'
             ? improvedStageDescriptions[gameState.lilithStage](gameState)
             : (currentStageData.description || "Opis niedostępny.");

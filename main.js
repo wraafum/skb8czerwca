@@ -6,8 +6,24 @@ import { initGame, generateEssence, stopAllIntervals } from './gameLogic.js';
 import { showCustomAlert, hideCustomAlert, updateDisplay, clearAllUiTimeouts } from './uiUpdates.js';
 // NOWE: Import funkcji aktualizujących zasoby dla przycisków testowych
 import { updateEssence, updateDarkEssence, updateCorruption } from './stateUpdaters.js';
+
 import { validateUpgradeConfig, validateResearchConfig, validateTemptationConfig } from './gameConfig.js';
 import { upgrades, researchProjects, temptationMissions } from './gameSystems.js';
+=======
+// Import definicji i walidatorów konfiguracji
+import { upgrades, researchProjects, temptationMissions } from './gameSystems.js';
+import { validateUpgradeConfig, validateResearchConfig, validateTemptationConfig } from './gameConfig.js';
+
+// Validate configuration consistency
+const upgradesValid = validateUpgradeConfig(upgrades.map(u => u.id));
+const researchValid = validateResearchConfig(researchProjects.map(rp => rp.id));
+const temptationsValid = validateTemptationConfig(temptationMissions.map(t => t.id));
+if (!upgradesValid || !researchValid || !temptationsValid) {
+    console.warn('Detected configuration issues with game data.');
+    if (typeof showCustomAlert === 'function') {
+        showCustomAlert('Wykryto problemy z konfiguracją. Sprawdź konsolę.');
+    }
+}
 
 // =======================================================
 // NOWA FUNKCJA DO REGULACJI WYSOKOŚCI PANELU
