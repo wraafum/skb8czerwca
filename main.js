@@ -6,6 +6,8 @@ import { initGame, generateEssence, stopAllIntervals } from './gameLogic.js';
 import { showCustomAlert, hideCustomAlert, updateDisplay, clearAllUiTimeouts } from './uiUpdates.js';
 // NOWE: Import funkcji aktualizujących zasoby dla przycisków testowych
 import { updateEssence, updateDarkEssence, updateCorruption } from './stateUpdaters.js';
+import { validateUpgradeConfig, validateResearchConfig, validateTemptationConfig } from './gameConfig.js';
+import { upgrades, researchProjects, temptationMissions } from './gameSystems.js';
 
 // =======================================================
 // NOWA FUNKCJA DO REGULACJI WYSOKOŚCI PANELU
@@ -30,8 +32,11 @@ function updateInteractionPanelHeight() {
 // Inicjalizacja gry
 document.addEventListener('DOMContentLoaded', () => {
     // Podpięcie event listenerów do przycisków zapisu/odczytu
-    updateInteractionPanelHeight(); 
+    updateInteractionPanelHeight();
     window.addEventListener('resize', updateInteractionPanelHeight);
+    validateUpgradeConfig(upgrades.map(u => u.id));
+    validateResearchConfig(researchProjects.map(r => r.id));
+    validateTemptationConfig(temptationMissions.map(t => t.id));
     if(dom.saveGameButton) {
         dom.saveGameButton.onclick = () => {
             if (saveGame()) {

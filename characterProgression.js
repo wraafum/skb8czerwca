@@ -2,6 +2,7 @@
 
 // NOWE: Import balance modifiers from config
 import { BALANCE_MODIFIERS } from './gameConfig.js';
+import { PLACEHOLDER_IMG } from './assets.js';
 
 export const improvedStageDescriptions = {
     0: (gs) => {
@@ -65,15 +66,15 @@ export const improvedStageDescriptions = {
 };
 
 export const lilithStages = [
-    { name: "Przyzwana", imagePath: "images/lilith_stage_0.png", description: improvedStageDescriptions[0] }, // Stage 0 - początkowy
-    { name: "Obserwująca", imagePath: "images/lilith_stage_1.png?v=1", description: improvedStageDescriptions[1] }, // Do Stage 1 po BP nar. stage 0
-    { name: "Ciekawska", imagePath: "images/lilith_stage_2.png", description: improvedStageDescriptions[2] }, // Do Stage 2 po BP nar. stage 1
-    { name: "Kuszona Wewnętrznie", imagePath: "images/lilith_stage_3.png", description: improvedStageDescriptions[3] }, // Do Stage 3 po BP nar. stage 2
-    { name: "Eksperymentująca", imagePath: "images/lilith_stage_4.png", description: improvedStageDescriptions[4] }, // Do Stage 4 po BP nar. stage 3
-    { name: "Uwodzicielska", imagePath: "images/lilith_stage_5.png", description: improvedStageDescriptions[5] }, // Do Stage 5 po BP nar. stage 4
-    { name: "Dominująca Pokusą", imagePath: "images/lilith_stage_6.png", description: improvedStageDescriptions[6] }, // Do Stage 6 po BP nar. stage 5
-    { name: "Skorumpowana Całkowicie", imagePath: "images/lilith_stage_7.png", description: improvedStageDescriptions[7] }, // Do Stage 7 po BP nar. stage 6
-    { name: "Arcysukkub", imagePath: "images/lilith_stage_8.png", description: improvedStageDescriptions[8] } // Do Stage 8 po rytuale i BP nar. stage 7
+    { name: "Przyzwana", imagePath: PLACEHOLDER_IMG, description: improvedStageDescriptions[0] },
+    { name: "Obserwująca", imagePath: PLACEHOLDER_IMG, description: improvedStageDescriptions[1] },
+    { name: "Ciekawska", imagePath: PLACEHOLDER_IMG, description: improvedStageDescriptions[2] },
+    { name: "Kuszona Wewnętrznie", imagePath: PLACEHOLDER_IMG, description: improvedStageDescriptions[3] },
+    { name: "Eksperymentująca", imagePath: PLACEHOLDER_IMG, description: improvedStageDescriptions[4] },
+    { name: "Uwodzicielska", imagePath: PLACEHOLDER_IMG, description: improvedStageDescriptions[5] },
+    { name: "Dominująca Pokusą", imagePath: PLACEHOLDER_IMG, description: improvedStageDescriptions[6] },
+    { name: "Skorumpowana Całkowicie", imagePath: PLACEHOLDER_IMG, description: improvedStageDescriptions[7] },
+    { name: "Arcysukkub", imagePath: PLACEHOLDER_IMG, description: improvedStageDescriptions[8] }
 ];
 
 // Pozostała część pliku (lilithVocalThoughts, lilithThoughts, etc.) bez zmian w tej iteracji,

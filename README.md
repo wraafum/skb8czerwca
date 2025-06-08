@@ -27,3 +27,12 @@ Game progress is stored in `localStorage` under the key `succubusCorruptionGameS
 - Requires a modern browser with ES module support.
 - Running the files directly with the `file://` scheme may fail; use a local server.
 - Saves are kept only in the current browser; there is no cloud sync.
+
+## License
+
+This project is distributed under the terms of the MIT License. See [LICENSE](LICENSE) for details.
+
+## Additional Files
+
+A short character sheet is provided in [Karta_postaci.md](Karta_postaci.md) instead of the previous binary document.
+All in-game graphics are tiny placeholder images embedded as base64 strings so the repository contains no binary assets.
