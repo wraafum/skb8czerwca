@@ -1,6 +1,8 @@
 # Succubus Corruption Game
 
-A small idle browser game about gathering Essence and corrupting a summoned succubus. Everything is written in vanilla JavaScript and structured as ES modules that run directly in the browser without any build step.
+A small idle browser game about gathering Essence and corrupting a summoned succubus.
+Everything is written in vanilla JavaScript and structured as ES modules.
+These run directly in the browser with no build step.
 
 ## Running the Game
 
@@ -14,7 +16,9 @@ Then visit `http://localhost:8000/index.html` in a modern browser.
 
 ## Saves
 
-Game progress is stored in `localStorage` under the key `succubusCorruptionGameSave_v1.2`. The save loads automatically whenever the page is opened again from the same origin. Clearing your browser data or using private browsing will start a new game.
+Game progress is stored in `localStorage` under the key `succubusCorruptionGameSave_v1.2`.
+The save loads automatically whenever the page is opened again from the same origin.
+Clearing your browser data or using private browsing will start a new game.
 
 ## Development Notes
 
