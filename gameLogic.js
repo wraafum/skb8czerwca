@@ -18,7 +18,7 @@ import {
     increaseSexualPreferenceLevel
 } from './stateUpdaters.js';
 import { lilithStages, upgradeReactions as allUpgradeReactions, improvedStageDescriptions } from './characterProgression.js';
-import { dialogues as allDialogues, diaryEntries as allDiaryEntries, temptationVisualDescriptions as allTemptationVisualDescriptions } from './narrativeElements.js';
+import { dialogues as allDialogues, diaryEntries as allDiaryEntries, idleEvents as allIdleEvents, temptationVisualDescriptions as allTemptationVisualDescriptions } from './narrativeElements.js';
 import {
     upgrades as allUpgrades, researchProjects as allResearchProjects,
     darkRituals as allDarkRituals, choiceUpgradeGroups as allChoiceUpgradeGroups,
@@ -34,6 +34,7 @@ const gameDefinitions = {
     lilithStages,
     diaryEntries: allDiaryEntries,
     temptationMissions: allTemptationMissions,
+    idleEvents: allIdleEvents,
     temptationVisualDescriptions: allTemptationVisualDescriptions,
     darkRituals: allDarkRituals,
     choiceUpgradeGroups: allChoiceUpgradeGroups,
@@ -44,8 +45,11 @@ const gameDefinitions = {
 
 let passiveGainIntervalId = null;
 let vocalThoughtIntervalId = null;
+let idleEventIntervalId = null;
 const VOCAL_THOUGHT_CHANGE_INTERVAL_SECONDS = BALANCE_MODIFIERS.vocalThoughts.changeIntervalSeconds;
+const IDLE_EVENT_INTERVAL_SECONDS = BALANCE_MODIFIERS.idleEvents.intervalSeconds;
 let vocalThoughtIntervalCounter = 0;
+let idleEventCounter = 0;
 
 // POPRAWKA: Skopiowana funkcja do regulacji wysokości, aby uniknąć problemów z importem cyklicznym
 export function updateInteractionPanelHeight() {
@@ -68,6 +72,11 @@ export function stopAllIntervals() {
         clearInterval(vocalThoughtIntervalId);
         vocalThoughtIntervalId = null;
         console.log("Vocal thought interval stopped.");
+    }
+    if (idleEventIntervalId) {
+        clearInterval(idleEventIntervalId);
+        idleEventIntervalId = null;
+        console.log("Idle event interval stopped.");
     }
 }
 
@@ -246,6 +255,19 @@ export function checkAndUnlockDiaryEntries() {
         if (conditions.requiresFlag && !gameState.playerChoiceFlags.includes(conditions.requiresFlag)) canUnlock = false;
         if (canUnlock) addUnlockedDiaryEntry(entry.id);
     });
+}
+
+function triggerRandomIdleEvent() {
+    const available = gameDefinitions.idleEvents.filter(evt => gameState.lilithStage >= evt.stageRequired);
+    if (available.length === 0) return;
+    const event = available[Math.floor(Math.random() * available.length)];
+    const rewards = event.rewards || {};
+    if (rewards.essence) updateEssence(rewards.essence);
+    if (rewards.darkEssence) updateDarkEssence(rewards.darkEssence);
+    if (rewards.corruption) updateCorruption(rewards.corruption);
+    ui.showCustomAlert(event.text);
+    ui.markResourcesDirty();
+    ui.updateDisplay();
 }
 
 export function buyUpgrade(upgradeId) {
@@ -476,6 +498,14 @@ export function initializePassiveGains() {
                 ui.displayRandomVocalThought();
                 vocalThoughtIntervalCounter = 0;
             }
+        }
+    }, 1000);
+
+    idleEventIntervalId = setInterval(() => {
+        idleEventCounter++;
+        if (idleEventCounter >= IDLE_EVENT_INTERVAL_SECONDS) {
+            triggerRandomIdleEvent();
+            idleEventCounter = 0;
         }
     }, 1000);
 }

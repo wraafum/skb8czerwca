@@ -79,7 +79,7 @@ function getDefaultGameState() {
             exhibitionism: { unlocked: false, level: 0, maxLevel: 5, description: "Publiczne akty, ryzyko przyłapania, pokazywanie się" },
             roleplay: { unlocked: false, level: 0, maxLevel: 5, description: "Odgrywanie ról, kostiumy, fantazje" },
             corruption_play: { unlocked: false, level: 0, maxLevel: 5, description: "Deprawacja niewiniątek, korupcja czystych dusz, zakazane pragnienia" },
-            popular_fetish: { unlocked: false, level: 0, maxLevel: 5, description: "Pozostałe popularne fetysze, np. sikanie, fiksacja oralna", subCategories: ['watersports', 'oral_fixation'] },
+            popular_fetish: { unlocked: false, level: 0, maxLevel: 5, description: "Pozostałe popularne fetysze, np. sikanie, fiksacja oralna", subCategories: ['watersports', 'oral_fixation', 'footplay'] },
             group_dynamics: { unlocked: false, level: 0, maxLevel: 5, description: "Organy kultowe, grupowe rytuały, dzielenie się Lilith" }
         },
         upgradesState: defaultUpgradesState,

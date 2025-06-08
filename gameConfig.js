@@ -228,6 +228,10 @@ export const BALANCE_MODIFIERS = {
     thoughts: {
         minIntervalMs: 20000,
         displayDurationMs: 15000,
+    },
+
+    idleEvents: {
+        intervalSeconds: 120
     }
 };
 
@@ -272,31 +276,3 @@ export function validateTemptationConfig(temptationIds) {
     return missingCosts.length === 0 && missingRewards.length === 0 && missingRates.length === 0;
 }
 
-// === EASY BALANCING PRESETS ===
-// Predefined multipliers for easy difficulty adjustment
-
-export const DIFFICULTY_PRESETS = {
-    easy: {
-        costMultiplier: 0.7,
-        rewardMultiplier: 1.3,
-        progressionSpeedMultiplier: 1.5,
-    },
-    normal: {
-        costMultiplier: 1.0,
-        rewardMultiplier: 1.0,
-        progressionSpeedMultiplier: 1.0,
-    },
-    hard: {
-        costMultiplier: 1.5,
-        rewardMultiplier: 0.8,
-        progressionSpeedMultiplier: 0.7,
-    }
-};
-
-// Helper function to apply difficulty preset
-export function applyDifficultyPreset(preset, baseValue, type = 'cost') {
-    const multiplier = type === 'cost' ? preset.costMultiplier : 
-                     type === 'reward' ? preset.rewardMultiplier : 
-                     preset.progressionSpeedMultiplier;
-    return Math.floor(baseValue * multiplier);
-}

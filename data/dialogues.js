@@ -643,7 +643,10 @@ export const dialogues = [
                 response: "Jej uśmiech staje się drapieżny. \"Z największą przyjemnością, Mistrzu.\" Zaczyna cię wiązać powoli, każdy węzeł zaciągany z precyzją i rosnącym podnieceniem w jej oczach. Gdy jesteś całkowicie unieruchomiony, pochyla się nad tobą. \"Teraz jesteś mój... całkowicie.\" To, co następuje, jest powolną, zmysłową torturą, pełną pieszczot i prowokacji, doprowadzając cię na skraj szaleństwa.",
                 corruption: 135,
                 darkEssence: 55,
-                onSelected: () => { addPlayerChoiceFlag('player_experienced_bondage_sub'); }
+                onSelected: () => {
+                    addPlayerChoiceFlag('player_experienced_bondage_sub');
+                    addSexualPreferenceSubCategory('bdsm', 'bondage');
+                }
             },
             {
                 id: 'isbe_let_her_tie_you',
@@ -651,7 +654,10 @@ export const dialogues = [
                 response: "Lilith drży, jej oczy błyszczą mieszanką strachu i ekscytacji. \"Tak, Mistrzu... chcę.\" Poddaje się twoim dłoniom, gdy ją krępujesz. Każdy dotyk szarfy na jej skórze wywołuje u niej dreszcz. \"To... to dziwne uczucie... być tak bezbronną.\" Gdy jest już związana, patrzy na ciebie z mieszanką uległości i wyzwania. \"Co teraz ze mną zrobisz, Mistrzu?\"",
                 corruption: 135,
                 darkEssence: 50,
-                onSelected: () => { addPlayerChoiceFlag('player_experienced_bondage_dom'); }
+                onSelected: () => {
+                    addPlayerChoiceFlag('player_experienced_bondage_dom');
+                    addSexualPreferenceSubCategory('bdsm', 'bondage');
+                }
             }
         ]
     },
@@ -794,6 +800,8 @@ export const dialogues = [
             darkEssence: 25,
             onSelected: () => {
                 addPlayerChoiceFlag('oral_fixation_accepted');
+                setSexualPreferenceUnlocked('popular_fetish', true);
+                addSexualPreferenceSubCategory('popular_fetish', 'oral_fixation');
             }
         },
         {
@@ -904,8 +912,8 @@ export const dialogues = [
         condition: (gs) => gs.lilithStage >= 5 && gs.playerChoiceFlags.includes('dominant_teaching_success') && gs.sexualPreferences.bdsm && gs.sexualPreferences.bdsm.unlocked && gs.sexualPreferences.bdsm.level >=1 && !gs.completedDialogues.includes('intimate_scene_lilith_takes_control') && gs.completedDialogues.includes('defiling_the_idol'),
         text: (gs) => "Lilith wchodzi do pokoju, jej ruchy są płynne i pełne drapieżnej gracji. Na jej ustach błąka się władczy uśmiech. \"Mistrzu,\" mruczy, jej głos jest niski i wibrujący. \"Dziś ja prowadzę. Nauczyłeś mnie wiele, ale teraz pora na moją lekcję. Lekcję absolutnej rozkoszy... i całkowitego poddania.\" Jej oczy płoną obietnicą.",
         options: [
-            { id: 'isltc_submit_eagerly', text: "\"Jestem twój, moja Królowo...\"", response: "Uśmiech Lilith staje się jeszcze szerszy. \"Doskonale.\" Podchodzi do ciebie, jej dotyk jest jednocześnie delikatny i stanowczy. To, co następuje, jest mistrzowskim pokazem jej nowo odkrytej dominacji – przejmuje inicjatywę w każdym aspekcie, prowadząc cię przez fale intensywnej przyjemności, której nigdy wcześniej nie doświadczyłeś. Jej pewność siebie jest odurzająca, a jej techniki... boskie.", corruption: 140, darkEssence: 60, onSelected: () => { addPlayerChoiceFlag('lilith_dominated_player_scene'); } },
-            { id: 'isltc_tease_challenge', text: "\"Myślisz, że potrafisz mnie zaskoczyć, mała demonico?\"", response: "Lilith śmieje się cicho, dźwiękiem, który przyprawia cię o dreszcze. \"Och, Mistrzu, nie tylko cię zaskoczę. Sprawię, że będziesz błagał o więcej.\" Jej ruchy stają się jeszcze bardziej prowokacyjne. Rzuca ci wyzwanie, byś spróbował odzyskać kontrolę, ale jej siła i zmysłowość są przytłaczające. Ostatecznie poddajesz się jej woli, tonąc w otchłani rozkoszy, którą dla ciebie przygotowała.", corruption: 140, darkEssence: 50 }
+            { id: 'isltc_submit_eagerly', text: "\"Jestem twój, moja Królowo...\"", response: "Uśmiech Lilith staje się jeszcze szerszy. \"Doskonale.\" Podchodzi do ciebie, jej dotyk jest jednocześnie delikatny i stanowczy. To, co następuje, jest mistrzowskim pokazem jej nowo odkrytej dominacji – przejmuje inicjatywę w każdym aspekcie, prowadząc cię przez fale intensywnej przyjemności, której nigdy wcześniej nie doświadczyłeś. Jej pewność siebie jest odurzająca, a jej techniki... boskie.", corruption: 140, darkEssence: 60, onSelected: () => { addPlayerChoiceFlag('lilith_dominated_player_scene'); addSexualPreferenceSubCategory('bdsm', 'dominance'); } },
+            { id: 'isltc_tease_challenge', text: "\"Myślisz, że potrafisz mnie zaskoczyć, mała demonico?\"", response: "Lilith śmieje się cicho, dźwiękiem, który przyprawia cię o dreszcze. \"Och, Mistrzu, nie tylko cię zaskoczę. Sprawię, że będziesz błagał o więcej.\" Jej ruchy stają się jeszcze bardziej prowokacyjne. Rzuca ci wyzwanie, byś spróbował odzyskać kontrolę, ale jej siła i zmysłowość są przytłaczające. Ostatecznie poddajesz się jej woli, tonąc w otchłani rozkoszy, którą dla ciebie przygotowała.", corruption: 140, darkEssence: 50, onSelected: () => { addSexualPreferenceSubCategory('bdsm', 'dominance'); } }
         ]
     },
     {
@@ -932,6 +940,7 @@ export const dialogues = [
                 onSelected: () => {
                     addPlayerChoiceFlag('player_chose_foot_dynamic');
                     addPlayerChoiceFlag('player_is_foot_dominant');
+                    addSexualPreferenceSubCategory('popular_fetish', 'footplay');
                 }
             },
             {
@@ -943,6 +952,7 @@ export const dialogues = [
                 onSelected: () => {
                     addPlayerChoiceFlag('player_chose_foot_dynamic');
                     addPlayerChoiceFlag('player_is_foot_submissive');
+                    addSexualPreferenceSubCategory('popular_fetish', 'footplay');
                 }
             }
         ]
@@ -958,8 +968,8 @@ export const dialogues = [
         condition: (gs) => gs.lilithStage >= 5 && gs.completedDialogues.includes('crossroads_of_the_feet'),
         text: (gs) => "Lilith wchodzi ubrana w... coś co wygląda jak erotyczna wersja akademickiego mundurka. Krótka spódniczka, ciasna biała koszula zawiązana pod biustem, okulary na nosie. 'Siadaj' rozkazuje, wskazując krzesło. 'Czas na lekcję.' W ręku trzyma wskaźnik, którym postukuje o dłoń.",
         options: [
-            { id: 'dt_obey', text: "Tak jest, pani profesor.", response: "aJej uśmiech jest zimny i pełen satysfakcji. 'Lubię posłusznych uczniów.'' Gdy podchodzi, jej biodra kołyszą się z gracją. Zamiast siadać, staje nad tobą, patrząc z góry. Dzisiejsza lekcja to: Anatomia mojej rozkoszy.' Bierze twoją rękę, jej uścisk jest zaskakująco silny. 'Ręka tutaj.' rozkazuje, prowadząc twoją dłoń do miejsca, gdzie jej skrzydła łączą się z plecami. 'Delikatny nacisk... o tak... czujesz, jak drżę pod twoim dotykiem? To jest, jak... Ahh, przycisk, który włącza we mnie ogień. A teraz...' jej głos staje się niskim mruknięciem, prowadzi twoją rękę niżej, do podstawy jej ogona. 'Masuj. Powoli. Okrężnymi ruchami.' 'To... to czyni sukkuba bardzo... bardzo... posłusznym.'", corruption: 110, darkEssence: 30, setsFlag: 'dominant_teaching_success' },
-            { id: 'dt_rebel', text: "A co jeśli wolę uczyć się... praktycznie?", response: "Jej oczy błyszczą niebezpiecznie. 'Nieposłuszny uczeń?' Wskaźnik ląduje z plaskiem na twojej dłoni. 'To wymaga... dyscypliny.' Pcha cię na łóżko, siadając okrakiem na twoich biodrach. 'Lekcja przymusowa więc.' Rozrywa twoją koszulę. 'Nauczę cię co się dzieje gdy się sprzeciwia sukkubowi w trybie nauczycielskim.' Jej paznokcie zostawiają czerwone ślady na twojej piersi. 'Pierwsza zasada - sukkub zawsze wie lepiej.' Pochyla się, przygryzając twoje ucho. 'Druga zasada - przyjemność może być karą.' Jej biodra zaczynają powolny, torturujący taniec. 'Trzecia zasada - nie skończę dopóki nie będziesz błagał o litość.'", corruption: 110, darkEssence: 40 }
+            { id: 'dt_obey', text: "Tak jest, pani profesor.", response: "aJej uśmiech jest zimny i pełen satysfakcji. 'Lubię posłusznych uczniów.'' Gdy podchodzi, jej biodra kołyszą się z gracją. Zamiast siadać, staje nad tobą, patrząc z góry. Dzisiejsza lekcja to: Anatomia mojej rozkoszy.' Bierze twoją rękę, jej uścisk jest zaskakująco silny. 'Ręka tutaj.' rozkazuje, prowadząc twoją dłoń do miejsca, gdzie jej skrzydła łączą się z plecami. 'Delikatny nacisk... o tak... czujesz, jak drżę pod twoim dotykiem? To jest, jak... Ahh, przycisk, który włącza we mnie ogień. A teraz...' jej głos staje się niskim mruknięciem, prowadzi twoją rękę niżej, do podstawy jej ogona. 'Masuj. Powoli. Okrężnymi ruchami.' 'To... to czyni sukkuba bardzo... bardzo... posłusznym.'", corruption: 110, darkEssence: 30, setsFlag: 'dominant_teaching_success', onSelected: () => { addSexualPreferenceSubCategory('bdsm', 'dominance'); } },
+            { id: 'dt_rebel', text: "A co jeśli wolę uczyć się... praktycznie?", response: "Jej oczy błyszczą niebezpiecznie. 'Nieposłuszny uczeń?' Wskaźnik ląduje z plaskiem na twojej dłoni. 'To wymaga... dyscypliny.' Pcha cię na łóżko, siadając okrakiem na twoich biodrach. 'Lekcja przymusowa więc.' Rozrywa twoją koszulę. 'Nauczę cię co się dzieje gdy się sprzeciwia sukkubowi w trybie nauczycielskim.' Jej paznokcie zostawiają czerwone ślady na twojej piersi. 'Pierwsza zasada - sukkub zawsze wie lepiej.' Pochyla się, przygryzając twoje ucho. 'Druga zasada - przyjemność może być karą.' Jej biodra zaczynają powolny, torturujący taniec. 'Trzecia zasada - nie skończę dopóki nie będziesz błagał o litość.'", corruption: 110, darkEssence: 40, onSelected: () => { addSexualPreferenceSubCategory('bdsm', 'dominance'); } }
         ]
     },
     {
@@ -1054,7 +1064,7 @@ export const dialogues = [
         text: (gs) => "Lilith wpada do pokoju, jej oczy świecą nieludzkim blaskiem. 'Coś... coś jest ze mną nie tak' dyszy. Jej skóra emanuje delikatną poświatą, a powietrze wokół niej wibruje energią. 'Mroczna esencja... zebrałam jej za dużo... Czuję jakbym miała eksplodować!' Patrzy na ciebie desperacko. 'Potrzebuję... potrzebuję uwolnienia. Natychmiast!'",
         options: [
             { id: 'eo_channel', text: "Pozwól mi pomóc ci to skanalizować.", response: "Rzuca się na ciebie z desperacją. 'Tak! Weź to! Weź wszystko!' Jej pocałunek jest brutalny, głodny. Czujesz jak energia przepływa między wami - surowa, pierwotna, oszałamiająca. Rozrywa wasze ubrania pazurami, jej ciało płonie gorącem. 'Potrzebuję cię! Teraz!' Gdy się łączycie, to jak eksplozja - jej esencja miesza się z twoją, tworząc burzę rozkoszy. Krzyczy, jej ciało wyginając się niemożliwie gdy fale energii przez nią przechodzą. 'NIE PRZESTAWAJ!' Jej paznokcie wbijają się w twoje plecy. 'Więcej! Głębiej! Mocniej!' Każde pchnięcie uwalnia kolejną falę mocy, aż oboje toniecie w ekstazie tak intensywnej, że graniczy z bólem.", corruption: 165, darkEssence: 60 },
-            { id: 'eo_dominate', text: "Na kolana. Pokażę ci jak kontrolować tę moc.", response: "Pada na kolana, patrząc na ciebie z mieszaniną desperacji i uwielbienia. 'Tak, Mistrzu... kontroluj mnie... używaj mnie...' Chwytasz ją za włosy, zmuszając do spojrzenia w twoje oczy. 'Otwórz usta' rozkazujesz. Posłusznie wykonuje polecenie, jej język już wysuwa się zapraszająco. Gdy ją używasz, czujesz jak mroczna energia przepływa - z każdym pchnięciem w jej gardło, moc się stabilizuje. 'Mmmph!' jej stłumione jęki mieszają się z dźwiękami ssania. Łzy spływają po jej policzkach, ale jej oczy błagają o więcej. Gdy dochodzisz, wypełniając jej usta, widzisz jak energia eksploduje - ale teraz pod kontrolą, skanalizowana w czystą rozkosz. Połyka zachłannie, a potem dyszy: 'Dziękuję... Mistrzu... jeszcze?'", corruption: 165, darkEssence: 80, sexualPreferenceTag: 'bdsm_submission' }
+            { id: 'eo_dominate', text: "Na kolana. Pokażę ci jak kontrolować tę moc.", response: "Pada na kolana, patrząc na ciebie z mieszaniną desperacji i uwielbienia. 'Tak, Mistrzu... kontroluj mnie... używaj mnie...' Chwytasz ją za włosy, zmuszając do spojrzenia w twoje oczy. 'Otwórz usta' rozkazujesz. Posłusznie wykonuje polecenie, jej język już wysuwa się zapraszająco. Gdy ją używasz, czujesz jak mroczna energia przepływa - z każdym pchnięciem w jej gardło, moc się stabilizuje. 'Mmmph!' jej stłumione jęki mieszają się z dźwiękami ssania. Łzy spływają po jej policzkach, ale jej oczy błagają o więcej. Gdy dochodzisz, wypełniając jej usta, widzisz jak energia eksploduje - ale teraz pod kontrolą, skanalizowana w czystą rozkosz. Połyka zachłannie, a potem dyszy: 'Dziękuję... Mistrzu... jeszcze?'", corruption: 165, darkEssence: 80, sexualPreferenceTag: 'bdsm_submission', onSelected: () => { addSexualPreferenceSubCategory('bdsm', 'submission'); } }
         ]
     },
     { 

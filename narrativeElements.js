@@ -16,6 +16,7 @@ import * as ui from './uiUpdates.js';
 
 export { dialogues } from './data/dialogues.js';
 export { diaryEntries } from './data/diaryEntries.js';
+export { idleEvents } from './data/idleEvents.js';
 export const temptationVisualDescriptions = {
     'tempt_corrupt_cleric': {
         start: "Lilith materializuje się w celi kleryka jako wizja anielska. Jej skóra lśni delikatnym blaskiem, a głos jest jak najsłodsza melodia...",
