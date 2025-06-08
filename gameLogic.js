@@ -358,6 +358,8 @@ export function changeAssignedMinions(temptationId, amount) {
 export function startTemptation(temptationId, isApprenticeMission = false) {
     const temptationDef = gameDefinitions.temptationMissions.find(t => t.id === temptationId);
     if (!temptationDef) return;
+    const temptationState = gameState.temptationMissionsState.find(t => t.id === temptationId);
+    if (temptationState?.isCompleted && !temptationDef.isRepeatable) return;
 
     if (isApprenticeMission) {
         if (gameState.activeTemptationApprentice || gameState.activeTemptation === temptationId) return;

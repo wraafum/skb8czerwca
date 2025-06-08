@@ -557,7 +557,7 @@ function renderTemptations() {
             const lilithButton = document.createElement('button');
             lilithButton.classList.add('interactive-button', 'temptation-button-custom', 'mt-2');
             lilithButton.textContent = "Rozpocznij Pokusę (Lilith)";
-            if (gameState.essence < temptationDef.essenceCost || gameState.darkEssence < temptationDef.darkEssenceCost || gameState.activeTemptation) {
+            if (gameState.essence < temptationDef.essenceCost || gameState.darkEssence < temptationDef.darkEssenceCost || gameState.activeTemptation || (temptationState.isCompleted && !temptationDef.isRepeatable)) {
                 lilithButton.disabled = true;
             }
             lilithButton.onclick = () => import('./gameLogic.js').then(logic => logic.startTemptation(temptationDef.id, false));
@@ -566,7 +566,7 @@ function renderTemptations() {
                 const apprenticeButton = document.createElement('button');
                 apprenticeButton.classList.add('interactive-button', 'temptation-button-apprentice-custom', 'mt-1');
                 apprenticeButton.textContent = "Rozpocznij Pokusę (Uczennica)";
-                if (gameState.essence < temptationDef.essenceCost || gameState.darkEssence < temptationDef.darkEssenceCost) {
+                if (gameState.essence < temptationDef.essenceCost || gameState.darkEssence < temptationDef.darkEssenceCost || (temptationState.isCompleted && !temptationDef.isRepeatable)) {
                     apprenticeButton.disabled = true;
                 }
                 apprenticeButton.onclick = () => import('./gameLogic.js').then(logic => logic.startTemptation(temptationDef.id, true));
