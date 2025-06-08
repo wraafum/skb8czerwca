@@ -138,7 +138,7 @@ export function displayLilithThought() {
 
     const possibleThoughts = currentStageThoughts.filter(thought => {
         const stageMatch = thought.stageRequired !== undefined ? gameState.lilithStage >= thought.stageRequired : true;
-        const corruptionMatch = thought.corruption ? (gameState.corruption >= thought.corruption[0] && gameState.corruption <= thought.corruption[1]) : true;
+        const corruptionMatch = true; // ignore corruption gating for now
         let flagMatch = thought.requiresFlag ? gameState.playerChoiceFlags.includes(thought.requiresFlag) : true;
         if (thought.requiresFlagSecondary && flagMatch) {
             flagMatch = gameState.playerChoiceFlags.includes(thought.requiresFlagSecondary);
@@ -195,8 +195,7 @@ export function displayRandomVocalThought() {
     const possibleThoughts = lilithVocalThoughts.filter(thought => {
         if (thought.id === 'initial_vocal_thought') return false;
         if (thought.stageRequired && gameState.lilithStage < thought.stageRequired) return false;
-        if (thought.corruptionMin && gameState.corruption < thought.corruptionMin) return false;
-        if (thought.corruptionMax && gameState.corruption > thought.corruptionMax) return false;
+        // Corruption-based filters are disabled
         if (thought.requiresFlag && !thought.requiresFlag.every(flag => gameState.playerChoiceFlags.includes(flag))) return false;
         if (thought.requiresNoFlag && thought.requiresNoFlag.some(flag => gameState.playerChoiceFlags.includes(flag))) return false;
         if (thought.sexualPreference) {

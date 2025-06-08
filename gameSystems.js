@@ -91,10 +91,7 @@ export function isGameAreaUnlocked(areaId, gameState) {
         return false;
     }
 
-    // Check corruption requirement (if defined)
-    if (unlockConditions.requiredCorruption !== undefined && gameState.corruption < unlockConditions.requiredCorruption) {
-        return false;
-    }
+    // Corruption requirements are disabled for now
 
     // Check required flags
     if (unlockConditions.requiredFlags) {
