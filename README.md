@@ -32,3 +32,7 @@ Game progress is stored in `localStorage` under the key `succubusCorruptionGameS
 
 This project is licensed under the [MIT License](LICENSE).
 
+## Additional Resources
+
+The character sheet for Lilith can be found in [Karta_postaci.md](Karta_postaci.md).
+
