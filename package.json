@@ -6,9 +6,11 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "test": "echo \"No tests specified\""
+    "validate": "node scripts/validateGameData.js",
+    "test": "node tests/runTests.js"
   },
   "devDependencies": {
     "eslint": "^8.56.0"
   }
 }
+

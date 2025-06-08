@@ -9,6 +9,8 @@ import {
 // Usunięto import 'stopAllIntervals', ponieważ będzie on teraz wywoływany w main.js
 import { setUpgradeUnlocked, setResearchProjectUnlocked } from './stateUpdaters.js'; // For initializeDefaultUnlocks
 
+export const SAVE_VERSION = '1.3';
+
 // Domyślny stan gry
 function getDefaultGameState() {
     const defaultUpgradesState = JSON.parse(JSON.stringify(allUpgrades)).map(u => ({
@@ -40,6 +42,7 @@ function getDefaultGameState() {
     }, {});
 
     return {
+        saveVersion: SAVE_VERSION,
         essence: 0,
         darkEssence: 0,
         corruption: 0,
@@ -92,10 +95,11 @@ function getDefaultGameState() {
 
 export let gameState = getDefaultGameState();
 
-export const GAME_SAVE_KEY = 'succubusCorruptionGameSave_v1.2';
+export const GAME_SAVE_KEY = `succubusCorruptionGameSave_v${SAVE_VERSION}`;
 
 export function saveGame() {
     try {
+        gameState.saveVersion = SAVE_VERSION;
         const serializedState = JSON.stringify(gameState);
         localStorage.setItem(GAME_SAVE_KEY, serializedState);
         console.log("Gra zapisana!");
@@ -119,7 +123,8 @@ export function loadGame() {
                 console.log(`Znaleziono starszy zapis gry (${oldSaveKey}). Próba migracji...`);
                 const loadedOldGs = JSON.parse(oldSerializedState);
                 const defaultStateForMigration = getDefaultGameState();
-                gameState = { ...defaultStateForMigration, ...loadedOldGs }; // Połączenie stanów
+                gameState = { ...defaultStateForMigration, ...loadedOldGs };
+                gameState.saveVersion = SAVE_VERSION;
                 gameState.playerChoiceFlags = loadedOldGs.playerChoiceFlags || defaultStateForMigration.playerChoiceFlags;
                 gameState.completedDialogues = loadedOldGs.completedDialogues || defaultStateForMigration.completedDialogues;
                 localStorage.removeItem(oldSaveKey);
@@ -133,11 +138,16 @@ export function loadGame() {
             const loadedGs = JSON.parse(serializedState);
             const defaultStateForLoad = getDefaultGameState();
             gameState = { ...defaultStateForLoad, ...loadedGs };
+            if (loadedGs.saveVersion && loadedGs.saveVersion !== SAVE_VERSION) {
+                console.log(`Wykryto starszą wersję zapisu (${loadedGs.saveVersion}). Aktualizacja do ${SAVE_VERSION}.`);
+            }
+            gameState.saveVersion = loadedGs.saveVersion || SAVE_VERSION;
         }
 
         gameState.completedDialogues = gameState.completedDialogues || [];
         gameState.playerChoiceFlags = gameState.playerChoiceFlags || [];
         gameState.unlockedDiaryEntryIds = gameState.unlockedDiaryEntryIds || [];
+        gameState.saveVersion = gameState.saveVersion || SAVE_VERSION;
 
         console.log("Gra wczytana!");
         initializeDefaultUnlocks();
@@ -155,6 +165,7 @@ export function resetGame() {
     localStorage.removeItem(GAME_SAVE_KEY);
     localStorage.removeItem('succubusCorruptionGameSave_v1.1');
     gameState = getDefaultGameState();
+    gameState.saveVersion = SAVE_VERSION;
     initializeDefaultUnlocks();
     console.log("Gra zresetowana.");
     return true;

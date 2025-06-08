@@ -255,6 +255,12 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: -10px;/* Kompensuje padding, by zachować oryginalne wyrównanie */
 }
 
+@media (max-width: 640px) {
+    .scrollable-content {
+        max-height: 300px;
+    }
+}
+
 /* NOWY STYL: Stylizacja paska przewijania wewnątrz panelu interakcji */
 .scrollable-content::-webkit-scrollbar {
     width: 8px;

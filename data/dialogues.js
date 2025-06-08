@@ -462,7 +462,7 @@ export const dialogues = [
                 darkEssence: 5,
                 onSelected: (gs) => {
                     setSexualPreferenceUnlocked('popular_fetish', true);
-                    addSexualPreferenceSubCategory('popular_fetish');
+                    addSexualPreferenceSubCategory('popular_fetish', 'watersports');
                     addPlayerChoiceFlag('player_open_to_watersports');
                 }
             },

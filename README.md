@@ -14,7 +14,7 @@ Then visit `http://localhost:8000/index.html` in a modern browser.
 
 ## Saves
 
-Game progress is stored in `localStorage` under the key `succubusCorruptionGameSave_v1.2`. The save loads automatically whenever the page is opened again from the same origin. Clearing your browser data or using private browsing will start a new game.
+Game progress is stored in `localStorage` under the key `succubusCorruptionGameSave_v1.3`. The save file now includes a version number for future migrations.
 
 ## Development Notes
 
