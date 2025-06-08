@@ -102,7 +102,6 @@ export function startDialogue(dialogueId) {
 
     // Clear any leftover timer so a prior dialogue doesn't close this one
     timeoutManager.clear('dialogueEnd');
-
     setActiveDialogue(dialogueDef);
     updateInteractionPanelHeight(); // Ustawiamy wysokość panelu
 
@@ -205,7 +204,7 @@ export function selectOption(dialogueId, optionId) {
         }
         clearActiveDialogue();
         ui.updateDisplay();
-    }, 6000);
+    }, 60000);
 }
 
 export function applyStageSpecificUnlocks() {
@@ -360,6 +359,8 @@ export function changeAssignedMinions(temptationId, amount) {
 export function startTemptation(temptationId, isApprenticeMission = false) {
     const temptationDef = gameDefinitions.temptationMissions.find(t => t.id === temptationId);
     if (!temptationDef) return;
+    const temptationState = gameState.temptationMissionsState.find(t => t.id === temptationId);
+    if (temptationState?.isCompleted && !temptationDef.isRepeatable) return;
 
     if (isApprenticeMission) {
         if (gameState.activeTemptationApprentice || gameState.activeTemptation === temptationId) return;
