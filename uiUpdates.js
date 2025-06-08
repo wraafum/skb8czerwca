@@ -16,7 +16,7 @@ const MAX_RECENT_VOCAL_THOUGHTS = BALANCE_MODIFIERS.vocalThoughts.maxRecentThoug
 const VOCAL_THOUGHT_FADE_DURATION = BALANCE_MODIFIERS.vocalThoughts.fadeDelayMs;
 
 let uiStateCache = {
-    essence: null, darkEssence: null, passiveEssenceRate: null,
+    essence: null, darkEssence: null, passiveEssenceRate: null, passiveDarkEssenceRate: null,
     corruption: null, essencePerClick: null, lilithNameStage: null,
     lilithImageSrc: null, lilithImageAlt: null, lilithDescription: null,
     lilithVocalThought: null, essenceGenerationUnlocked: null,
@@ -251,6 +251,11 @@ function updateResourceDisplay() {
          currentPassiveEssence += eliteMinions.arch_succubus_apprentice.passiveEssenceGeneration;
     }
     updateTextContentIfNeeded(dom.passiveEssenceRateEl, currentPassiveEssence.toFixed(1), 'passiveEssenceRate');
+    let currentPassiveDarkEssence = gameState.passiveDarkEssencePerSecond;
+    if (gameState.eliteMinion.apprentice.recruited && eliteMinions.arch_succubus_apprentice?.passiveDarkEssenceGeneration) {
+         currentPassiveDarkEssence += eliteMinions.arch_succubus_apprentice.passiveDarkEssenceGeneration;
+    }
+    updateTextContentIfNeeded(dom.passiveDarkEssenceRateEl, currentPassiveDarkEssence.toFixed(1), 'passiveDarkEssenceRate');
     updateTextContentIfNeeded(dom.corruptionCountEl, gameState.corruption.toString(), 'corruption');
     updateTextContentIfNeeded(dom.essencePerClickEl, gameState.essencePerClick.toString(), 'essencePerClick');
 }

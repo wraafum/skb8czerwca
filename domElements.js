@@ -4,6 +4,7 @@
 export const essenceCountEl = document.getElementById('essence-count');
 export const darkEssenceCountEl = document.getElementById('dark-essence-count');
 export const passiveEssenceRateEl = document.getElementById('passive-essence-rate');
+export const passiveDarkEssenceRateEl = document.getElementById('passive-dark-essence-rate');
 export const corruptionCountEl = document.getElementById('corruption-count');
 export const essencePerClickEl = document.getElementById('essence-per-click');
 
