@@ -212,7 +212,7 @@ export function applyStageSpecificUnlocks() {
         if (upgState && !upgState.unlocked && !upgState.purchased) {
             let shouldUnlock = false;
             if (upgDef.requiredStage !== undefined && gameState.lilithStage >= upgDef.requiredStage) shouldUnlock = true;
-            if (upgDef.corruptionRequired !== undefined && gameState.corruption >= upgDef.corruptionRequired) shouldUnlock = true;
+            // Temporarily ignore corruption requirements during early balancing
             if (upgDef.initialUnlockedState) shouldUnlock = true;
             if (shouldUnlock) setUpgradeUnlocked(upgDef.id, true);
         }
@@ -237,7 +237,7 @@ export function checkAndUnlockDiaryEntries() {
         const conditions = entry.unlockConditions;
         let canUnlock = true;
         if (conditions.stageRequired !== undefined && gameState.lilithStage < conditions.stageRequired) canUnlock = false;
-        if (conditions.corruptionMin !== undefined && gameState.corruption < conditions.corruptionMin) canUnlock = false;
+        // Corruption requirements are currently disabled
         if (conditions.completedDialogueId && !gameState.completedDialogues.includes(conditions.completedDialogueId)) canUnlock = false;
         if (conditions.choiceMadeInDialogue) {
             const flagToCheck = `choice_${conditions.choiceMadeInDialogue.dialogueId}_${conditions.choiceMadeInDialogue.optionId}`;

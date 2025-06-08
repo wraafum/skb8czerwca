@@ -14,7 +14,7 @@ function renderUpgrades() {
         if (upgradeDef.id === 'recruit_arch_succubus_apprentice' && (!gameState.playerChoiceFlags.includes('lilith_is_arch_succubus') || gameState.eliteMinion.apprentice.recruited)) return;
         if (!upgradeState.unlocked || (upgradeState.purchased && !isChoiceUnlockPending && upgradeDef.id !== 'train_praktykant_1' && upgradeDef.id !== 'recruit_arch_succubus_apprentice')) return;
         if (upgradeDef.requiredStage && gameState.lilithStage < upgradeDef.requiredStage) return;
-        if (upgradeDef.corruptionRequired && gameState.corruption < upgradeDef.corruptionRequired) return;
+        // Temporarily ignore corruption gating on upgrades
         const tooltipContainer = document.createElement('div');
         tooltipContainer.classList.add('tooltip-container');
         const button = document.createElement('button');
@@ -93,7 +93,7 @@ function renderDarkRituals() {
     dom.darkRitualsListEl.innerHTML = '';
     allDarkRituals.forEach(ritualDef => {
         const ritualState = gameState.darkRitualsState.find(s => s.id === ritualDef.id);
-        if (!ritualState || ritualState.isCompleted || gameState.lilithStage < ritualDef.requiredStage || (ritualDef.corruptionRequired && gameState.corruption < ritualDef.corruptionRequired)) return;
+        if (!ritualState || ritualState.isCompleted || gameState.lilithStage < ritualDef.requiredStage) return;
         if (ritualDef.id === 'ritual_arch_succubus_ascension' && gameState.playerChoiceFlags.includes('lilith_is_arch_succubus')) return;
         const ritualDiv = document.createElement('div');
         ritualDiv.classList.add('ritual-item', 'mb-3', 'p-3', 'border', 'rounded-md');
@@ -158,7 +158,7 @@ function renderTemptations() {
     } else {
         allTemptationMissions.forEach(temptationDef => {
             const temptationState = gameState.temptationMissionsState.find(ts => ts.id === temptationDef.id) || { assignedMinions: 0, isCompleted: false };
-            if ((temptationState.isCompleted && !temptationDef.isRepeatable) || gameState.lilithStage < temptationDef.requiredLilithStage || gameState.corruption < temptationDef.requiredCorruption) return;
+            if ((temptationState.isCompleted && !temptationDef.isRepeatable) || gameState.lilithStage < temptationDef.requiredLilithStage) return;
             const temptationDiv = document.createElement('div');
             temptationDiv.classList.add('temptation-item-custom', 'mb-3', 'p-4', 'rounded-lg', 'shadow-md');
             const nameEl = document.createElement('h4');

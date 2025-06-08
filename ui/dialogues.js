@@ -39,7 +39,7 @@ function renderAvailableDialogues() {
         }
         return;
     }
-    dialogues.filter(d => (d.isBreakingPoint || d.id === 'vocal_breakthrough_dialogue') && !gameState.completedDialogues.includes(d.id) && gameState.lilithStage >= d.stageRequired && gameState.corruption >= (d.corruptionRequired || 0) && (!d.condition || d.condition(gameState))).forEach(dialogue => {
+    dialogues.filter(d => (d.isBreakingPoint || d.id === 'vocal_breakthrough_dialogue') && !gameState.completedDialogues.includes(d.id) && gameState.lilithStage >= d.stageRequired && (!d.condition || d.condition(gameState))).forEach(dialogue => {
         const button = document.createElement('button');
         button.classList.add('interactive-button', 'button-accent', 'border-2', 'border-yellow-400', 'pulse-animation');
         if (dialogue.imagePath) {
