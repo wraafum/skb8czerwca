@@ -56,7 +56,7 @@ function getDefaultGameState() {
         completedDialogues: [],
         playerChoiceFlags: [],
         unlockedDiaryEntryIds: [],
-        actionModifiers: { purityChance: 0 },
+        actionModifiers: { purityChance: 0, criticalChance: 0, criticalMultiplier: 1 },
         activeDialogue: null,
         lastEssenceReactionThreshold: 0,
         lastThoughtTimestamp: 0,
