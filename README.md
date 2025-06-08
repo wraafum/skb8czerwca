@@ -21,9 +21,6 @@ Game progress is stored in `localStorage` under the key `succubusCorruptionGameS
 - All `.js` files use ES module syntax.
 - Tailwind CSS is included from a CDN.
 - There is no build process.
-- `main.js` runs configuration validation on startup. If any upgrade,
-  research project or temptation is missing its config data you will see a
-  console warning and an alert in the browser.
 
 ## Known Limitations
 
