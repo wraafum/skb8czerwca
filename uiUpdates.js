@@ -23,10 +23,19 @@ let uiStateCache = {
 };
 
 let dirtyFlags = {
-    dialogues: true, upgrades: true, research: true, rituals: true,
-    diary: true, lore: true, temptations: true, minions: true,
-    sexualPreferences: true, upgradeChoices: true, lilithDisplay: true,
-    resources: true, all: true
+    dialogues: true,
+    upgrades: true,
+    research: true,
+    rituals: true,
+    diary: true,
+    lore: true,
+    temptations: true,
+    minions: true,
+    sexualPreferences: true,
+    upgradeChoices: true,
+    lilithDisplay: true,
+    resources: true,
+    all: true
 };
 
 export function markDialoguesDirty() { dirtyFlags.dialogues = true; }
@@ -282,6 +291,7 @@ function updateLilithDisplay() {
         uiStateCache.lilithVocalThought = "";
     }
 }
+
 
 
 export function updateDisplay() {

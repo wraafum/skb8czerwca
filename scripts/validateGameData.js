@@ -1,5 +1,14 @@
 import { idleEvents } from '../data/idleEvents.js';
 import { UPGRADE_COSTS, RESEARCH_COSTS, RESEARCH_REWARDS, TEMPTATION_COSTS, TEMPTATION_REWARDS, TEMPTATION_SUCCESS_RATES, validateUpgradeConfig, validateResearchConfig, validateTemptationConfig } from '../gameConfig.js';
+import { idleEvents } from '../data/idleEvents.js';
+
+function validateIdleEvents(upgradeIds) {
+    const invalid = idleEvents.filter(evt => evt.requiresUpgradeId && !upgradeIds.includes(evt.requiresUpgradeId));
+    if (invalid.length > 0) {
+        console.warn('Idle events reference missing upgrades:', invalid.map(e => e.id));
+    }
+    return invalid.length === 0;
+}
 
 export function validateIdleEvents(upgradeIds) {
     let valid = true;
