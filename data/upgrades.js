@@ -1,4 +1,4 @@
-import { setNestUpgrade, updateCorruption, updateDarkEssence, increasePassiveDarkEssencePerSecond, setCorruptionBonusMultiplier, addPlayerChoiceFlag, setEliteMinionRecruited, setEliteMinionLevel, setMinionUnlocked, increaseMinionCount } from "../stateUpdaters.js";
+import { setNestUpgrade, updateCorruption, updateDarkEssence, increasePassiveDarkEssencePerSecond, setCorruptionBonusMultiplier, addPlayerChoiceFlag, setEliteMinionRecruited, setEliteMinionLevel, setMinionUnlocked, increaseMinionCount, setActionModifier } from "../stateUpdaters.js";
 import { UPGRADE_COSTS, UPGRADE_VALUES, NEST_UPGRADE_REWARDS } from "../gameConfig.js";
 
 export const upgrades = [
@@ -90,6 +90,19 @@ export const upgrades = [
         type: 'choice_unlock',
         unlocksChoiceGroupId: 'essence_mastery_1',
         purchased: false, unlocked: false, initialUnlockedState: false, requiredStage: 2
+    },
+    {
+        id: 'critical_click_training',
+        name: 'Sekret Demonicznego Dotyku',
+        cost: UPGRADE_COSTS.critical_click_training.essence,
+        darkEssenceCost: UPGRADE_COSTS.critical_click_training.darkEssence || undefined,
+        description: 'Lilith zdradza Ci technikę skupiania energii w jednym punkcie. Kliknięcia mają 20% szansy dać potrójną ilość Esencji.',
+        type: 'special',
+        onPurchase: (gs) => { setActionModifier('criticalChance', UPGRADE_VALUES.critical_click_chance); setActionModifier('criticalMultiplier', UPGRADE_VALUES.critical_click_multiplier); },
+        purchased: false,
+        unlocked: false,
+        initialUnlockedState: false,
+        requiredStage: 2
     },
     {
         id: 'nest_bed_upgrade_1',

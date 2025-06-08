@@ -12,6 +12,7 @@ export const UPGRADE_COSTS = {
     essence_boost_2: { essence: 300, darkEssence: 0 },
     passive_essence_2: { essence: 1200, darkEssence: 0 },
     essence_mastery_choice_unlock: { essence: 400, darkEssence: 0 },
+    critical_click_training: { essence: 500, darkEssence: 20 },
     
     // Nest Upgrades
     nest_bed_upgrade_1: { essence: 200, darkEssence: 10 },
@@ -40,6 +41,8 @@ export const UPGRADE_VALUES = {
     
     // Action Modifiers
     purity_chance_1: 0.1,
+    critical_click_chance: 0.2,
+    critical_click_multiplier: 2,
     
     // Dark Essence Multipliers
     dark_gift_shadow_kiss: 0.10,

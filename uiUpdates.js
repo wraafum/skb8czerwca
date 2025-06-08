@@ -105,6 +105,14 @@ export function hideCustomAlert() {
     if (dom.customAlertModalEl) dom.customAlertModalEl.classList.add('hidden');
 }
 
+export function playCriticalClickEffect() {
+    if (!dom.lilithImageContainerEl) return;
+    const spark = document.createElement('div');
+    spark.className = 'critical-spark';
+    dom.lilithImageContainerEl.appendChild(spark);
+
+    setTimeout(() => spark.remove(), 600);
+}
 export function displayEssenceReaction() {
     for (const reaction of essenceReactions) {
         if (gameState.essence >= reaction.threshold && gameState.lastEssenceReactionThreshold < reaction.threshold) {

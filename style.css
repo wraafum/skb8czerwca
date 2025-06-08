@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06); text-align: center;
 }
 .resource-item-custom .emoji { font-size: 1.5rem; display: block; margin-bottom: 0.25rem; }
-.lilith-image-placeholder { background-color: rgb(var(--color-surface-dark)); }
+.lilith-image-placeholder { background-color: rgb(var(--color-surface-dark)); position: relative; overflow: hidden; }
 .lilith-feedback p { font-size: 0.875rem; font-style: italic; transition: opacity 0.5s ease-in-out; margin-top: 0.25rem; }
 #lilith-essence-reaction { color: rgb(var(--color-primary-light)); }
 #lilith-upgrade-reaction { color: rgb(var(--color-success)); }
@@ -286,4 +286,22 @@ h1, h2, h3, h4, h5, h6 {
     object-fit: cover;
     display: block;
     margin-bottom: 4px;
+}
+@keyframes critical-spark {
+    from { opacity: 1; transform: scale(0); }
+    to { opacity: 0; transform: scale(2); }
+}
+
+.critical-spark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
+    margin-left: -40px;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(var(--color-accent),1) 0%, rgba(var(--color-accent),0) 70%);
+    animation: critical-spark 0.6s ease-out forwards;
 }

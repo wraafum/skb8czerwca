@@ -80,9 +80,17 @@ export function stopAllIntervals() {
     }
 }
 
+
 export function generateEssence() {
     if (!gameState.essenceGenerationUnlocked) return;
-    updateEssence(gameState.essencePerClick);
+    let gain = gameState.essencePerClick;
+    let critical = false;
+    if (gameState.actionModifiers.criticalChance > 0 && Math.random() < gameState.actionModifiers.criticalChance) {
+        gain *= gameState.actionModifiers.criticalMultiplier || 2;
+        critical = true;
+    }
+    updateEssence(gain);
+    if (critical) ui.playCriticalClickEffect();
     if (gameState.actionModifiers.purityChance > 0 && Math.random() < gameState.actionModifiers.purityChance) {
         updateDarkEssence(Math.floor(1 * gameState.darkEssenceMultiplier));
     }
@@ -90,8 +98,8 @@ export function generateEssence() {
     applyStageSpecificUnlocks();
     ui.markResourcesDirty();
     ui.updateDisplay();
-}
 
+}
 export function startDialogue(dialogueId) {
     const dialogueDef = gameDefinitions.dialogues.find(item => item.id === dialogueId);
     if (!dialogueDef) return;
