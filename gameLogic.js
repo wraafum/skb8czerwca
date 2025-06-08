@@ -100,6 +100,10 @@ export function startDialogue(dialogueId) {
     updateEssence(-totalEssenceCost);
     updateDarkEssence(-totalDarkEssenceCost);
 
+    // W przypadku gdy poprzednia interakcja wciąż posiada aktywny timer zakończenia,
+    // usuń go, aby nie wywołał clearActiveDialogue() podczas nowej rozmowy.
+    timeoutManager.clear('dialogueEnd');
+
     setActiveDialogue(dialogueDef);
     updateInteractionPanelHeight(); // Ustawiamy wysokość panelu
 
