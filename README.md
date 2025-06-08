@@ -27,3 +27,8 @@ Game progress is stored in `localStorage` under the key `succubusCorruptionGameS
 - Requires a modern browser with ES module support.
 - Running the files directly with the `file://` scheme may fail; use a local server.
 - Saves are kept only in the current browser; there is no cloud sync.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
