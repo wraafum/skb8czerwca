@@ -119,6 +119,7 @@ export function startDialogue(dialogueId) {
     updateEssence(-totalEssenceCost);
     updateDarkEssence(-totalDarkEssenceCost);
 
+    main
     timeoutManager.clear('dialogueEnd');
     setActiveDialogue(dialogueDef);
     updateInteractionPanelHeight(); // Ustawiamy wysokość panelu
