@@ -100,9 +100,7 @@ export function startDialogue(dialogueId) {
     updateEssence(-totalEssenceCost);
     updateDarkEssence(-totalDarkEssenceCost);
 
-    // If a previous interaction still has an active dialogueEnd timer,
-    // clear it so the old timeout doesn't trigger clearActiveDialogue()
-    // and close the new dialogue prematurely.
+    // Clear any leftover timer so a prior dialogue doesn't close this one
     timeoutManager.clear('dialogueEnd');
 
     setActiveDialogue(dialogueDef);
