@@ -9,10 +9,6 @@ import { updateEssence, updateDarkEssence, updateCorruption } from './stateUpdat
 
 import { validateUpgradeConfig, validateResearchConfig, validateTemptationConfig } from './gameConfig.js';
 import { upgrades, researchProjects, temptationMissions } from './gameSystems.js';
-=======
-// Import definicji i walidatorów konfiguracji
-import { upgrades, researchProjects, temptationMissions } from './gameSystems.js';
-import { validateUpgradeConfig, validateResearchConfig, validateTemptationConfig } from './gameConfig.js';
 
 // Validate configuration consistency
 const upgradesValid = validateUpgradeConfig(upgrades.map(u => u.id));

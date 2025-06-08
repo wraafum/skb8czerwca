@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "description": "A browser-based clicker and visual novel.",
   "license": "MIT",
-  "scripts": {
-    "test": "echo \"No tests specified\""
-=======
   "type": "module",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "echo \"No tests specified\""
   }
 }
