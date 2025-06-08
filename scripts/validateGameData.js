@@ -1,4 +1,13 @@
 import { UPGRADE_COSTS, RESEARCH_COSTS, RESEARCH_REWARDS, TEMPTATION_COSTS, TEMPTATION_REWARDS, TEMPTATION_SUCCESS_RATES, validateUpgradeConfig, validateResearchConfig, validateTemptationConfig } from '../gameConfig.js';
+import { idleEvents } from '../data/idleEvents.js';
+
+function validateIdleEvents(upgradeIds) {
+    const invalid = idleEvents.filter(evt => evt.requiresUpgradeId && !upgradeIds.includes(evt.requiresUpgradeId));
+    if (invalid.length > 0) {
+        console.warn('Idle events reference missing upgrades:', invalid.map(e => e.id));
+    }
+    return invalid.length === 0;
+}
 
 export function validateAll() {
     const upgradeIds = Object.keys(UPGRADE_COSTS);
@@ -7,7 +16,8 @@ export function validateAll() {
     const upgradesValid = validateUpgradeConfig(upgradeIds);
     const researchValid = validateResearchConfig(researchIds);
     const temptationsValid = validateTemptationConfig(temptationIds);
-    return upgradesValid && researchValid && temptationsValid;
+    const idleValid = validateIdleEvents(upgradeIds);
+    return upgradesValid && researchValid && temptationsValid && idleValid;
 }
 
 if (import.meta.main) {

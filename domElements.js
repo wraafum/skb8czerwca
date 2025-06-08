@@ -98,5 +98,6 @@ export const lilithImgTag = document.getElementById('lilith-img-tag');      // N
 // NOWE: Element dla głośnych myśli Lilith
 export const lilithVocalThoughtDisplayEl = document.getElementById('lilith-vocal-thought-display');
 
+
 export const diaryToggleIcon = document.getElementById('diary-toggle-icon');
 export const interactionContentWrapperEl = document.getElementById('interaction-content-wrapper');

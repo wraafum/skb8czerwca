@@ -13,6 +13,8 @@ export const UPGRADE_COSTS = {
     passive_essence_2: { essence: 1200, darkEssence: 0 },
     essence_mastery_choice_unlock: { essence: 400, darkEssence: 0 },
     critical_click_training: { essence: 500, darkEssence: 20 },
+    idle_variety_1: { essence: 200, darkEssence: 0 },
+    idle_variety_2: { essence: 800, darkEssence: 20 },
     
     // Nest Upgrades
     nest_bed_upgrade_1: { essence: 200, darkEssence: 10 },
@@ -234,7 +236,8 @@ export const BALANCE_MODIFIERS = {
     },
 
     idleEvents: {
-        intervalSeconds: 120
+        intervalSeconds: 120,
+        maxRecentEvents: 5
     }
 };
 

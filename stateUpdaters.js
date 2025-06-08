@@ -130,6 +130,7 @@ export function increasePassiveEssencePerSecond(value) {
 
 export function increasePassiveDarkEssencePerSecond(value) {
     gameState.passiveDarkEssencePerSecond += value;
+    ui.markResourcesDirty();
 }
 
 export function setDarkEssenceMultiplier(value) {

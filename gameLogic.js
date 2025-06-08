@@ -48,8 +48,10 @@ let vocalThoughtIntervalId = null;
 let idleEventIntervalId = null;
 const VOCAL_THOUGHT_CHANGE_INTERVAL_SECONDS = BALANCE_MODIFIERS.vocalThoughts.changeIntervalSeconds;
 const IDLE_EVENT_INTERVAL_SECONDS = BALANCE_MODIFIERS.idleEvents.intervalSeconds;
+const MAX_RECENT_IDLE_EVENTS = BALANCE_MODIFIERS.idleEvents.maxRecentEvents || 5;
 let vocalThoughtIntervalCounter = 0;
 let idleEventCounter = 0;
+let lastIdleEventIndices = [];
 
 // POPRAWKA: Skopiowana funkcja do regulacji wysokości, aby uniknąć problemów z importem cyklicznym
 export function updateInteractionPanelHeight() {
@@ -266,9 +268,28 @@ export function checkAndUnlockDiaryEntries() {
 }
 
 function triggerRandomIdleEvent() {
-    const available = gameDefinitions.idleEvents.filter(evt => gameState.lilithStage >= evt.stageRequired);
+    const available = gameDefinitions.idleEvents.filter(evt => {
+        if (gameState.lilithStage < evt.stageRequired) return false;
+        if (evt.requiresUpgradeId) {
+            const upgState = gameState.upgradesState.find(u => u.id === evt.requiresUpgradeId);
+            if (!upgState || !upgState.purchased) return false;
+        }
+        return true;
+    });
     if (available.length === 0) return;
-    const event = available[Math.floor(Math.random() * available.length)];
+
+    let selectable = available.filter(evt => !lastIdleEventIndices.includes(gameDefinitions.idleEvents.indexOf(evt)));
+    if (selectable.length === 0) {
+        selectable = available;
+        lastIdleEventIndices = [];
+    }
+
+    const event = selectable[Math.floor(Math.random() * selectable.length)];
+    const originalIndex = gameDefinitions.idleEvents.indexOf(event);
+    if (originalIndex !== -1) {
+        lastIdleEventIndices.push(originalIndex);
+        if (lastIdleEventIndices.length > MAX_RECENT_IDLE_EVENTS) lastIdleEventIndices.shift();
+    }
     const rewards = event.rewards || {};
     if (rewards.essence) updateEssence(rewards.essence);
     if (rewards.darkEssence) updateDarkEssence(rewards.darkEssence);

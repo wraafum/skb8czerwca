@@ -36,3 +36,4 @@ This project is distributed under the terms of the MIT License. See [LICENSE](LI
 
 A short character sheet is provided in [Karta_postaci.md](Karta_postaci.md) instead of the previous binary document.
 All in-game graphics are tiny placeholder images embedded as base64 strings so the repository contains no binary assets.
+Development guidelines for adding new dialogues and upgrades can be found in [docs/adding_content.md](docs/adding_content.md).

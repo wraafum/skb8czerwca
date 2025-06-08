@@ -105,6 +105,19 @@ export const upgrades = [
         requiredStage: 2
     },
     {
+        id: 'idle_variety_1',
+        name: 'Historie z Bezruchu I',
+        cost: UPGRADE_COSTS.idle_variety_1.essence,
+        darkEssenceCost: UPGRADE_COSTS.idle_variety_1.darkEssence,
+        description: 'Odblokowuje dodatkowe wydarzenia losowe dla etapów 1-4.',
+        type: 'special',
+        onPurchase: () => {},
+        purchased: false,
+        unlocked: false,
+        initialUnlockedState: false,
+        requiredStage: 1,
+    },
+    {
         id: 'nest_bed_upgrade_1',
         name: 'Wygodniejsze Gniazdko dla Lilith',
         cost: UPGRADE_COSTS.nest_bed_upgrade_1.essence,
@@ -164,6 +177,19 @@ export const upgrades = [
         unlocked: false, 
         initialUnlockedState: false, 
         requiredStage: 3
+    },
+    {
+        id: 'idle_variety_2',
+        name: 'Historie z Bezruchu II',
+        cost: UPGRADE_COSTS.idle_variety_2.essence,
+        darkEssenceCost: UPGRADE_COSTS.idle_variety_2.darkEssence,
+        description: 'Więcej losowych wydarzeń dla późniejszych etapów.',
+        type: 'special',
+        onPurchase: () => {},
+        purchased: false,
+        unlocked: false,
+        initialUnlockedState: false,
+        requiredStage: 5,
     },
     {
         id: 'train_praktykant_1',
