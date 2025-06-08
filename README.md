@@ -21,7 +21,6 @@ Game progress is stored in `localStorage` under the key `succubusCorruptionGameS
 - All `.js` files use ES module syntax.
 - Tailwind CSS is included from a CDN.
 - There is no build process.
-- Run `npm run lint` to check the code with ESLint.
 
 ## Known Limitations
 
